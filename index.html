@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Knowledge Sharing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="Daily learning record,Emotion sharing">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Knowledge Sharing">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Knowledge Sharing">
+<meta property="og:description" content="Daily learning record,Emotion sharing">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Knowledge Sharing">
+<meta name="twitter:description" content="Daily learning record,Emotion sharing">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Knowledge Sharing" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/assets/image/geek.gif">
   
   <link rel="stylesheet" type="text/css" href="/./main.266c1c.css">
   <style type="text/css">
@@ -30,6 +34,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?ef914f9377d5733693dd9c98ca399eed";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 
@@ -42,19 +56,19 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/assets/image/icon.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		  <h1 class="header-author"><a href="/">Xihao</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">很高兴你来到这里</p>
 		
 
 		<nav class="header-menu">
 			<ul>
 			
 				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -65,8 +79,6 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
             
     			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
@@ -76,13 +88,11 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/151250010" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
 		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="mail" target="_blank" href="mailto:851642452@qq.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -100,15 +110,15 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/assets/image/icon.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">John Doe</h1>
+			  <h1 class="header-author js-header-author">Xihao</h1>
 			</hgroup>
 			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>很高兴你来到这里<i class="icon icon-quo-right"></i></p>
 			
 			
-				
 			
 				
 			
@@ -117,13 +127,11 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/151250010" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
 			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="mail" target="_blank" href="mailto:851642452@qq.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -132,9 +140,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -151,28 +157,37 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Hello-World-0" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-深入解读springmvc--4，自定义一个RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/31/Hello-World-0/">Hello_World</a>
+      <a class="article-title" href="/2017/08/22/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/">深入解读springmvc--4，自定义一个RequestMappingHandlerMapping</a>
     </h1>
   
 
         
-        <a href="/2017/08/31/Hello-World-0/" class="archive-article-date">
-  	<time datetime="2017-08-31T04:59:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-31</time>
+        <a href="/2017/08/22/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/" class="archive-article-date">
+  	<time datetime="2017-08-22T05:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Hello World!</p>
-
+        <blockquote>
+<p>又到了找成就感的深度定制SpringMVC组件的时间，这次我想依托已有的IOC容器，完全自己实现一个<strong>发现HandlerMethod以及能够正确处理请求</strong>的简化版<strong>RequestMappingHandlerMapping</strong>，简单处理路径以及请求方法的匹配，对于参数，请求头，跨域请求等先不处理。</p>
+</blockquote>
+<p>其实RequestMappingHandlerMapping主要有两个功能需要实现：</p>
+<ul>
+<li>initHandlerMethods() 发现所有的RequestMapping处理方法，以及将他们保存进入内存等待检索</li>
+<li>getHandler() 检索内存中的处理方法，找到Http请求对应的最佳处理方法，并且可以匹配ant风格的路径检索，还有就是拦截器的处理。</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/08/22/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/#more">more >></a>
+        
       
 
       
@@ -180,12 +195,19 @@
     <div class="article-info article-info-index">
       
       
-      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">custom springmvc</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/31/Hello-World-0/">展开全文 >></a>
-        </p>
+
       
 
       
@@ -214,36 +236,36 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-深入解读springmvc--3，剖析RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/31/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/08/16/深入解读springmvc--3，剖析RequestMappingHandlerMapping/">深入解读springmvc--3，剖析RequestMappingHandlerMapping</a>
     </h1>
   
 
         
-        <a href="/2017/08/31/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-31T04:48:12.085Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-31</time>
+        <a href="/2017/08/16/深入解读springmvc--3，剖析RequestMappingHandlerMapping/" class="archive-article-date">
+  	<time datetime="2017-08-16T05:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+        <blockquote>
+<p>又到了我最喜欢的啃代码时间。</p>
+</blockquote>
+<h3 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h3><blockquote>
+<p>上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1502879716515.jpg" alt="server log"></p>
+        
+          <a class="article-more-a" href="/2017/08/16/深入解读springmvc--3，剖析RequestMappingHandlerMapping/#more">more >></a>
+        
       
 
       
@@ -251,12 +273,417 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">springmvc 源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/31/hello-world/">展开全文 >></a>
-        </p>
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/14/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/">深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/14/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" class="archive-article-date">
+  	<time datetime="2017-08-14T05:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一个Http请求进入SpringMVC的完整流程："><a href="#一个Http请求进入SpringMVC的完整流程：" class="headerlink" title="一个Http请求进入SpringMVC的完整流程："></a>一个Http请求进入SpringMVC的完整流程：</h3><p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1502700762444.jpg" alt="process request"></p>
+<p>首先看下动态请求的处理：（静态资源请求的处理其实比较简单，只是以流的方式把静态资源写入response中而已）</p>
+        
+          <a class="article-more-a" href="/2017/08/14/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">custom springmvc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">springmvc 源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-实现自己的SpringMvc框架--1,读懂springmvc源码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/13/实现自己的SpringMvc框架--1,读懂springmvc源码/">深入解读springmvc--1，摸清DispatcherServlet</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/13/实现自己的SpringMvc框架--1,读懂springmvc源码/" class="archive-article-date">
+  	<time datetime="2017-08-13T05:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1502612262728.jpg" alt="小丑图片"></p>
+<p>很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。</p>
+<p>打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个web应用程序的入口点，捕获了所有的请求，进行分析找到相应的控制器和方法来处理这个请求，然后生成模型和视图，最后由视图来进行渲染自身。</p>
+<blockquote>
+<p>整篇博客分为三个部分：</p>
+</blockquote>
+<ul>
+<li>了解Java Servlet</li>
+<li>DispatcherServlet的继承关系</li>
+<li>DispatcherServlet初始化做的每一步的工作</li>
+</ul>
+<blockquote>
+<p>下一篇博客会继续分析DispatcherServlet:</p>
+</blockquote>
+<ul>
+<li>mvc处理Http请求的具体流程</li>
+<li>自己实现一个A货DispatcherServlet</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/08/13/实现自己的SpringMvc框架--1,读懂springmvc源码/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">custom springmvc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">springmvc 源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-带你入门travis-ci" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/06/带你入门travis-ci/">带你入门travis-ci</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/06/带你入门travis-ci/" class="archive-article-date">
+  	<time datetime="2017-08-06T05:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-travis-ci-简单介绍"><a href="#1-travis-ci-简单介绍" class="headerlink" title="1, travis-ci 简单介绍"></a>1, travis-ci 简单介绍</h3><p>travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不失为一个很好的选择。</p>
+<h3 id="2-travis-ci-使用"><a href="#2-travis-ci-使用" class="headerlink" title="2, travis-ci 使用"></a>2, travis-ci 使用</h3><h4 id="2-1-注册使用travis"><a href="#2-1-注册使用travis" class="headerlink" title="2.1 注册使用travis"></a>2.1 注册使用travis</h4><p>github 上面的public repository可以使用<a href="https://travis-ci.org" target="_blank" rel="external">travis-ci.org</a> </p>
+<p>private repository 使用<a href="https://travis-ci.com/" target="_blank" rel="external">travis-ci.com</a></p>
+<p>绑定github账号，然后选择需要使用的仓库：</p>
+<p><img src="/assets/images/带你入门travis-ci/1502000156199.jpg" alt="示例图片"></p>
+<p>然后往仓库的根目录下面添加命名为.travis.yml的配置文件，然后进行push即可，多次commit的话会选择最新的一次进行构建。</p>
+        
+          <a class="article-more-a" href="/2017/08/06/带你入门travis-ci/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">travis-ci</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-yilia的个人配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/04/yilia的个人配置/">yilia的个人配置</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/04/yilia的个人配置/" class="archive-article-date">
+  	<time datetime="2017-08-04T01:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="theme配置文件的修改"><a href="#theme配置文件的修改" class="headerlink" title="theme配置文件的修改"></a>theme配置文件的修改</h3><p>yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。</p>
+<p><img src="/assets/images/yilia的个人配置/1501772461925.jpg" alt="enter description here"></p>
+<p>可以参考主题作者的配置： <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">作者的README中的_config.yml</a></p>
+<p>还有的是主题作者的博客备份: <a href="https://github.com/litten/BlogBackup" target="_blank" rel="external">作者的博客备份</a></p>
+<h4 id="配置自己的头像"><a href="#配置自己的头像" class="headerlink" title="配置自己的头像"></a>配置自己的头像</h4><p>修改themes/yilia/_cofig.yml 中的头像url路径，</p>
+<p><img src="/assets/images/yilia的个人配置/1501816216486.jpg" alt="配置中的头像url"></p>
+        
+          <a class="article-more-a" href="/2017/08/04/yilia的个人配置/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-个人博客搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/03/个人博客搭建/">十分钟完成个人博客的搭建</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/03/个人博客搭建/" class="archive-article-date">
+  	<time datetime="2017-08-03T04:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/assets/images/十分钟完成个人博客的搭建/1501826379006.jpg" alt="呜呜呜"></p>
+<h3 id="博客简介"><a href="#博客简介" class="headerlink" title="博客简介"></a>博客简介</h3><p>寒假放假的时候学了一点vue，简单用vue和php搭建的<a href="https://github.com/151250010/myblog" target="_blank" rel="external">个人博客</a>现在看来有很多的不足，不支持markdown，写博客必须要手写html的，所以这天用hexo搭建github pages个人博客，把流程记录一下，需要的人可以看下，一切顺利的话真的十分钟足够了。</p>
+<p>暑期确实没什么意思，不像当咸鱼所以定目标每天一篇博客来给自己找点事情干。博客内容可能包括近期玩的技术栈，准备开始刷算法一些题解，看得框架源码的记录等。</p>
+        
+          <a class="article-more-a" href="/2017/08/03/个人博客搭建/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
       
 
       
@@ -295,7 +722,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 John Doe
+    		&copy; 2017 Xihao
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -312,7 +739,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -336,8 +763,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -349,15 +774,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -376,6 +799,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">travis-ci</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">custom springmvc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">springmvc 源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">建站教程</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -421,43 +860,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">曾锡豪&lt;br&gt;南京大学软件学院学生&lt;br&gt;&lt;br&gt;favor LOL and code&lt;br&gt;dreaming to be a geek&lt;br&gt;content of myself</div>
   	  	
     	</section>
     
