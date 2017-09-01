@@ -5,13 +5,29 @@ node_js:
 cache:
   directories:
     - "node_modules"  
-before_install:
-  - sudo apt-get install git
 install:
   - npm install hexo --save
-  - npm install hexo-deployer-git --save
 script:
-  - git config --global user.name "151250010"
-  - git config --global user.email "851642452@qq.com"
   - hexo clean
-  - hexo g -d
+  - hexo g
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "151250010"
+  - git config user.email "851642452@qq.com"
+  - git add .
+  - git commit -m "Update Blogs"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+
+branches:
+  only:
+    - BlogSource
+
+env:
+  global:
+    - GH_REF: github.com/151250010/151250010.github.io.git
+
+cache:
+  directories:
+    - "node_modules"
