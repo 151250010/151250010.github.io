@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "6"
+cache:
+  directories:
+    - "node_modules"  
+install:
+  - npm install hexo-cli -g
+  - npm install hexo-deployer-git -g
+script:
+  - hexo clean
+  - hexo g -d
