@@ -4,6 +4,7 @@ node_js:
 cache:
   directories:
     - "node_modules"  
+    
 install:
   - npm install hexo --save
   - npm install hexo-deployer-git --save
