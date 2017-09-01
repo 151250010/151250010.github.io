@@ -6,17 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>带你入门travis-ci | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="曾锡豪的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="一，travis-ci 简单介绍travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不">
+<meta name="keywords" content="travis-ci">
+<meta property="og:type" content="article">
+<meta property="og:title" content="带你入门travis-ci">
+<meta property="og:url" content="http://yoursite.com/2017/08/08/带你入门travis-ci/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="曾锡豪的个人博客">
+<meta property="og:description" content="一，travis-ci 简单介绍travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504200923703.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504200967720.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504200997169.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504201024217.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504201237775.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504201251349.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504201329895.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504201369749.jpg">
+<meta property="og:updated_time" content="2017-08-31T17:47:10.429Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="曾锡豪的个人博客">
+<meta name="twitter:title" content="带你入门travis-ci">
+<meta name="twitter:description" content="一，travis-ci 简单介绍travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不">
+<meta name="twitter:image" content="http://yoursite.com/assets/images/带你入门travis-ci/1504200923703.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -152,342 +163,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-深入解读springmvc--4，自定义一个RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-带你入门travis-ci" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/">深入解读springmvc--4，自定义一个RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-23T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>又到了找成就感的深度定制SpringMVC组件的时间，这次我想依托已有的IOC容器，完全自己实现一个发现HandlerMethod以及能够正确处理请求的简化版RequestMappingHandlerMapping，简单处理路径以及请求方法的匹配，对于参数，请求头，跨域请求等先不处理。</p>
-</blockquote>
-<p>其实RequestMappingHandlerMapping主要有两个功能需要实现：</p>
-<ul>
-<li>initHandlerMethods() 发现所有的RequestMapping处理方法，以及将他们保存进入内存等待检索</li>
-<li>getHandler() 检索内存中的处理方法，找到Http请求对应的最佳处理方法，并且可以匹配ant风格的路径检索，还有就是拦截器的处理。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--3，剖析RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/">深入解读springmvc--3，剖析RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-19T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>又到了我最喜欢的啃代码时间。</p>
-</blockquote>
-<h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：</p>
-</blockquote>
-<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236077006.jpg" alt="enter description here"></p>
-<p>1, init DispatcherServlet<br>2, begin to refresh webapplicationcontext for DispatcherServlet whose namespace is “dispatcherServlet-servlet”<br>3, load bean definitions from the xml configuration declared by contextConfigLocation in initParam of dispatcherServlet<br>4, RequestMappingHandlerMapping tries to map and save all (url，handler) defined by @RequestMapping<br>5, RequestMappingHandlerAdapter tries to look for all exception handler defined by @ControllerAdvice<br>6, SimpleUrlRequestMapping register a handler DefaultServletHttpRequestHandler for path [\/**]<br>7, init DispatcherServlet successfully</p>
-        
-          <a class="article-more-a" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/">深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-16T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，一个Http请求进入SpringMVC的完整流程："><a href="#一，一个Http请求进入SpringMVC的完整流程：" class="headerlink" title="一，一个Http请求进入SpringMVC的完整流程："></a>一，一个Http请求进入SpringMVC的完整流程：</h2><p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504202988871.jpg" alt="enter description here"></p>
-        
-          <a class="article-more-a" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--1，摸清DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/">深入解读springmvc--1，摸清DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-13T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。</p>
-<p>打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个web应用程序的入口点，捕获了所有的请求，进行分析找到相应的控制器和方法来处理这个请求，然后生成模型和视图，最后由视图来进行渲染自身。</p>
-<blockquote>
-<p>整篇博客分为三个部分：</p>
-</blockquote>
-<ul>
-<li>了解Java Servlet</li>
-<li>DispatcherServlet的继承关系</li>
-<li>DispatcherServlet初始化做的每一步的工作</li>
-</ul>
-<blockquote>
-<p>下一篇博客会继续分析DispatcherServlet:</p>
-</blockquote>
-<ul>
-<li>mvc处理Http请求的具体流程</li>
-<li>自己实现一个A货DispatcherServlet</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-带你入门travis-ci" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/带你入门travis-ci/">带你入门travis-ci</a>
+    <h1 class="article-title" itemprop="name">
+      带你入门travis-ci
     </h1>
   
 
@@ -501,9 +184,52 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一，travis-ci-简单介绍"><a href="#一，travis-ci-简单介绍" class="headerlink" title="一，travis-ci 简单介绍"></a>一，travis-ci 简单介绍</h2><p>travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不失为一个很好的选择。</p>
-        
-          <a class="article-more-a" href="/2017/08/08/带你入门travis-ci/#more">more >></a>
-        
+<a id="more"></a>
+<h2 id="二，travis-ci-使用"><a href="#二，travis-ci-使用" class="headerlink" title="二，travis-ci 使用"></a>二，travis-ci 使用</h2><h3 id="1，注册使用TRAVIS"><a href="#1，注册使用TRAVIS" class="headerlink" title="1，注册使用TRAVIS"></a>1，注册使用TRAVIS</h3><p>github 上面的public repository可以使用<a href="https://travis-ci.org/" target="_blank" rel="external">https://travis-ci.org/</a></p>
+<p>private repository 使用<a href="https://travis-ci.com/" target="_blank" rel="external">https://travis-ci.com/</a></p>
+<p>绑定github账号，然后选择需要使用的仓库：</p>
+<p><img src="/assets/images/带你入门travis-ci/1504200923703.jpg" alt="enter description here"></p>
+<p>然后往仓库的根目录下面添加命名为.travis.yml的配置文件，然后进行push即可，多次commit的话会选择最新的一次进行构建。</p>
+<h3 id="2，自定义-TRAVIS-YML配置文件"><a href="#2，自定义-TRAVIS-YML配置文件" class="headerlink" title="2，自定义.TRAVIS.YML配置文件"></a>2，自定义.TRAVIS.YML配置文件</h3><p>首先需要了解一下travis的生命周期，travis一次构建由两个部分组成：install和script:</p>
+<ul>
+<li>install : 安装项目需要的各种依赖，包括系统需要的安装包，定制的服务等</li>
+<li>script: 执行构建脚本</li>
+</ul>
+<p>一共可以细分为12个执行步骤，每个步骤都可以按照自己的需求进行定制化：</p>
+<p><img src="/assets/images/带你入门travis-ci/1504200967720.jpg" alt="enter description here"></p>
+<p>每个步骤的具体解释可以看下文档：<a href="https://docs.travis-ci.com/user/customizing-the-build/" target="_blank" rel="external">https://docs.travis-ci.com/user/customizing-the-build/</a></p>
+<p>例如java项目的一个例子：</p>
+<p><img src="/assets/images/带你入门travis-ci/1504200997169.jpg" alt="enter description here"></p>
+<p>sudo:required 表明需要的时候可以使用sudo，其他的选项为false,enabled<br>dist:trusty是改变默认的ubuntu 12.04版本升级到Ubuntu Linux Trusty 14.04</p>
+<p>你也可以选择在mac系统中跑测试,</p>
+<p><img src="/assets/images/带你入门travis-ci/1504201024217.jpg" alt="enter description here"></p>
+<h3 id="3，执行SHELL脚本"><a href="#3，执行SHELL脚本" class="headerlink" title="3，执行SHELL脚本"></a>3，执行SHELL脚本</h3><p>每个步骤可以执行自己写的脚本来自定义构建：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">install:</span> </div><div class="line">	<span class="bullet">-</span> <span class="string">./install.sh</span></div></pre></td></tr></table></figure>
+<p>但是需要保证有运行脚本的权限，Linux系统可以使用chmod +x install.sh去除脚本的执行权限。</p>
+<h3 id="4，使用系统环境变量"><a href="#4，使用系统环境变量" class="headerlink" title="4，使用系统环境变量"></a>4，使用系统环境变量</h3><p>travis提供了一些系统变量供使用，每次构建配置中我们可以使用这些变量：</p>
+<p>变量具体说明： <a href="https://docs.travis-ci.com/user/environment-variables#Default-Environment-Variables" target="_blank" rel="external">https://docs.travis-ci.com/user/environment-variables#Default-Environment-Variables</a></p>
+<p>使用系统变量的例子:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">after_success:</span></div><div class="line"><span class="bullet">  -</span> <span class="string">for</span> <span class="string">name</span> <span class="string">in</span> <span class="string">$(find</span> <span class="string">$TRAVIS_BUILD_DIR</span> <span class="bullet">-name</span> <span class="string">'*.html'</span><span class="string">);</span> <span class="string">do</span> <span class="string">ls</span> <span class="bullet">-hl</span> <span class="string">$name;</span>  <span class="string">done</span></div><div class="line"><span class="bullet">  -</span> <span class="string">date</span></div></pre></td></tr></table></figure>
+<h2 id="三，部署"><a href="#三，部署" class="headerlink" title="三，部署"></a>三，部署</h2><p>travis-ci支持的部署环境很多，包括熟悉的AWS,github pages等，唯独少了阿里云，腾讯云等国内的云厂商。</p>
+<p>AWS等的部署看下文档即可: <a href="https://docs.travis-ci.com/user/deployment/" target="_blank" rel="external">https://docs.travis-ci.com/user/deployment/</a></p>
+<p>对于国内的云服务器，我用expect配合ssh实现交互式的连接脚本，用scp传输需要的文件。</p>
+<p>例如:</p>
+<p>首先安装expect依赖:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">before_install:</span></div><div class="line"><span class="bullet">-</span><span class="string">sudo</span> <span class="string">apt-get</span> <span class="bullet">-qq</span> <span class="string">update</span></div><div class="line"><span class="bullet">-</span><span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="string">expect</span></div></pre></td></tr></table></figure>
+<p>然后执行shell脚本</p>
+<p><img src="/assets/images/带你入门travis-ci/1504201237775.jpg" alt="enter description here"></p>
+<p>构建成功之后选择执行部署的脚本，然后在脚本中用完成部署的工作。</p>
+<p><img src="/assets/images/带你入门travis-ci/1504201251349.jpg" alt="enter description here"></p>
+<p>但是讲账号密码明文写在脚本中是很不理智的，我们需要安装一个<a href="https://github.com/travis-ci/travis.rb#readme" target="_blank" rel="external">the travis client</a></p>
+<p>按照README中的说明进行安装即可，首先执行<code>travis login --pro</code>或者<code>travis login</code> 进行登录，–pro时对应travis.com的私有仓库的</p>
+<p>然后执行命令: <code>travis encrypt-file deploy.sh --add</code>即可，会输出一个deploy.sh.enc的加密之后的文件，而且会自动在.travis.yml文件中加上</p>
+<p><img src="/assets/images/带你入门travis-ci/1504201329895.jpg" alt="enter description here"></p>
+<p>内容就是讲加密生成的deploy.sh.enc重新生成输出为deploy.sh，对于脚本我们需要去除运行权限，所以在生成deploy.sh之后，加上<code>chmod +x deploy.sh</code>即可：</p>
+<p><img src="/assets/images/带你入门travis-ci/1504201369749.jpg" alt="enter description here"></p>
+<p>这样的话，就可以把原来的明文脚本去除，只剩下加密之后的脚本在我们的项目中，在安装依赖之前重新解密生成脚本。</p>
+<h2 id="四，结尾"><a href="#四，结尾" class="headerlink" title="四，结尾"></a>四，结尾</h2><p>其实travis还有很多东西可以选择去玩一下的，例如自定义notifications，还有深究怎么加快构建速度，这个文章权当个入门读物看下就好了。</p>
+<p>（其实是写个博客居然花了我两个小时，，实在不想写下去了，到这里也确实算是入门了，我有深入的使用感悟之后下次还是会写博客的。）</p>
+
       
 
       
@@ -527,10 +253,82 @@ var _hmt = _hmt || [];
       
 
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/08/带你入门travis-ci/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          深入解读springmvc--1，摸清DispatcherServlet
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/05/yilia的个人配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">yilia的个人配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -545,160 +343,39 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-yilia的个人配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/yilia的个人配置/">yilia的个人配置</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/05/yilia的个人配置/" class="archive-article-date">
-  	<time datetime="2017-08-05T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，theme配置文件的修改"><a href="#一，theme配置文件的修改" class="headerlink" title="一，theme配置文件的修改"></a>一，theme配置文件的修改</h2><p>yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。</p>
-<p><img src="/assets/images/yilia的个人配置/1504195372695.jpg" alt="enter description here"></p>
-<p>可以参考主题作者的配置：<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a></p>
-<p>还有的是主题作者的博客备份:<a href="https://github.com/litten/BlogBackup" target="_blank" rel="external">https://github.com/litten/BlogBackup</a></p>
-        
-          <a class="article-more-a" href="/2017/08/05/yilia的个人配置/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一，travis-ci-简单介绍"><span class="toc-number">1.</span> <span class="toc-text">一，travis-ci 简单介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二，travis-ci-使用"><span class="toc-number">2.</span> <span class="toc-text">二，travis-ci 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，注册使用TRAVIS"><span class="toc-number">2.1.</span> <span class="toc-text">1，注册使用TRAVIS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，自定义-TRAVIS-YML配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">2，自定义.TRAVIS.YML配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，执行SHELL脚本"><span class="toc-number">2.3.</span> <span class="toc-text">3，执行SHELL脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4，使用系统环境变量"><span class="toc-number">2.4.</span> <span class="toc-text">4，使用系统环境变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三，部署"><span class="toc-number">3.</span> <span class="toc-text">三，部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四，结尾"><span class="toc-number">4.</span> <span class="toc-text">四，结尾</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-十分钟完成个人博客的搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/十分钟完成个人博客的搭建/">十分钟完成个人博客的搭建</a>
-    </h1>
   
 
-        
-        <a href="/2017/08/03/十分钟完成个人博客的搭建/" class="archive-article-date">
-  	<time datetime="2017-08-03T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>寒假放假的时候学了一点vue，简单用vue和php搭建的<a href="https://github.com/151250010/myblog" target="_blank" rel="external">个人博客</a>现在看来有很多的不足，不支持markdown，写博客必须要手写html的，所以这天用hexo搭建github pages个人博客，把流程记录一下，需要的人可以看下，一切顺利的话真的十分钟足够了。</p>
-        
-          <a class="article-more-a" href="/2017/08/03/十分钟完成个人博客的搭建/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
+  <div id="SOHUCS" sid="带你入门travis-ci" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "cyt8Y7w50"; 
+var conf = "prod_147703479bb2596139f77f6050e47188"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -721,8 +398,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

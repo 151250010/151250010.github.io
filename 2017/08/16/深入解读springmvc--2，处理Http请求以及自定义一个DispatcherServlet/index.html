@@ -6,17 +6,45 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="曾锡豪的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="一，一个Http请求进入SpringMVC的完整流程：">
+<meta name="keywords" content="springmvc源码,custom spring mvc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet">
+<meta property="og:url" content="http://yoursite.com/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="曾锡豪的个人博客">
+<meta property="og:description" content="一，一个Http请求进入SpringMVC的完整流程：">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504202988871.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203048990.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203071618.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203158918.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203170881.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203193591.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203214890.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203297363.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203307781.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203318210.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203331089.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203346929.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203358779.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235460250.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235471339.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235484938.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235496771.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235514808.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235533222.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235549929.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235564616.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235578030.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235592704.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235602893.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235614150.jpg">
+<meta property="og:updated_time" content="2017-09-01T03:16:27.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="曾锡豪的个人博客">
+<meta name="twitter:title" content="深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet">
+<meta name="twitter:description" content="一，一个Http请求进入SpringMVC的完整流程：">
+<meta name="twitter:image" content="http://yoursite.com/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504202988871.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -152,174 +180,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-深入解读springmvc--4，自定义一个RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/">深入解读springmvc--4，自定义一个RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-23T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>又到了找成就感的深度定制SpringMVC组件的时间，这次我想依托已有的IOC容器，完全自己实现一个发现HandlerMethod以及能够正确处理请求的简化版RequestMappingHandlerMapping，简单处理路径以及请求方法的匹配，对于参数，请求头，跨域请求等先不处理。</p>
-</blockquote>
-<p>其实RequestMappingHandlerMapping主要有两个功能需要实现：</p>
-<ul>
-<li>initHandlerMethods() 发现所有的RequestMapping处理方法，以及将他们保存进入内存等待检索</li>
-<li>getHandler() 检索内存中的处理方法，找到Http请求对应的最佳处理方法，并且可以匹配ant风格的路径检索，还有就是拦截器的处理。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--3，剖析RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/">深入解读springmvc--3，剖析RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-19T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>又到了我最喜欢的啃代码时间。</p>
-</blockquote>
-<h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：</p>
-</blockquote>
-<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236077006.jpg" alt="enter description here"></p>
-<p>1, init DispatcherServlet<br>2, begin to refresh webapplicationcontext for DispatcherServlet whose namespace is “dispatcherServlet-servlet”<br>3, load bean definitions from the xml configuration declared by contextConfigLocation in initParam of dispatcherServlet<br>4, RequestMappingHandlerMapping tries to map and save all (url，handler) defined by @RequestMapping<br>5, RequestMappingHandlerAdapter tries to look for all exception handler defined by @ControllerAdvice<br>6, SimpleUrlRequestMapping register a handler DefaultServletHttpRequestHandler for path [\/**]<br>7, init DispatcherServlet successfully</p>
-        
-          <a class="article-more-a" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/">深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet</a>
+    <h1 class="article-title" itemprop="name">
+      深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet
     </h1>
   
 
@@ -333,9 +201,90 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一，一个Http请求进入SpringMVC的完整流程："><a href="#一，一个Http请求进入SpringMVC的完整流程：" class="headerlink" title="一，一个Http请求进入SpringMVC的完整流程："></a>一，一个Http请求进入SpringMVC的完整流程：</h2><p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504202988871.jpg" alt="enter description here"></p>
-        
-          <a class="article-more-a" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/#more">more >></a>
-        
+<a id="more"></a>
+<p>首先看下动态请求的处理：（静态资源请求的处理其实比较简单，只是以流的方式把静态资源写入response中而已）</p>
+<p>在Servlet容器中，一个请求的完整流程是：</p>
+<p>1.Servlet容器调用Servlet.service()<br>2.HttpServlet.service()分发get,post等<br>3.FrameworkServlet.doGet()<br>4.final FrameworkServlet.processRequest()<br>5.DispatcherServlet.doService()<br>6.DispatcherServlet.doDispatch()<br>7.根据请求的url路径找到可以匹配的HandlerMapping，调用其getHandler得到HandlerExecutionChain，HandlerExecution具体包含了实际的handler处理逻辑以及一组提供额外功能拦截器</p>
+<blockquote>
+<p>看下doDispatch中的对getHandler的调用以及getHandler的实现：</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203048990.jpg" alt="enter description here"></p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203071618.jpg" alt="enter description here"></p>
+<p><em>DispatcherServlet初始化完成之后，DispatcherServlet的所有的mvc元素都已经被赋值，所以直接遍历this.handlerMappings调用getHandler，handler不为空直接返回。</em></p>
+<p><strong>getHandler的具体逻辑实现以及HandlerMapping中的对的初始化设置，先留下来下一篇继续深入探索。</strong></p>
+<p>8.用HandlerExecution中的拦截器对请求进行预处理，必须要所有的拦截器的preHandler都执行成功才会继续，否则直接返回，请求处理完毕。</p>
+<blockquote>
+<p>doDispatch中的调用HandlerAdapter以及预处理请求部分</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203158918.jpg" alt="enter description here"></p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203170881.jpg" alt="enter description here"></p>
+<p>9.预处理成功之后，根据找到的HandlerExecutionChain的handler找到支持该handler的HandlerAdapter，调用HandlerAdapter.handle(request,response,handler)</p>
+<p>10.找到一个HandlerAdapter的具体实现（以RequestMapping注解的RequestMappingHandlerAdapter为例）,RequestMappingHandlerAdapter.handleInternal(request,response,method)，用反射调用具体的处理方法，并且生成ModelAndView</p>
+<blockquote>
+<p>调用handle方法直接生成ModelAndView:</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203193591.jpg" alt="enter description here"></p>
+<blockquote>
+<p>RequestMappingHandlerAdapter的实现：</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203214890.jpg" alt="enter description here"></p>
+<p><strong>继续深入的话就是利用反射工具反射调用处理方法，以及ModelAndView的生成。先留着，下下篇继续深入。</strong></p>
+<p>11，在DispatcherServlet中的doDispatch方法获得返回的ModelAndView，最后进行模型和视图的渲染</p>
+<p><strong>视图的渲染也留着下下篇博客继续深入</strong></p>
+<h2 id="二，订制自己的DispatcherServlet"><a href="#二，订制自己的DispatcherServlet" class="headerlink" title="二，订制自己的DispatcherServlet"></a>二，订制自己的DispatcherServlet</h2><p>啃书啃了半天，来找点成就感吧，准备实现一个侏儒版的DispatcherServlet，把每个部分的功能都砍一遍，自己依托已有的FrameworkServlet写个CustomDispatcherServlet。</p>
+<p>分两步吧：<br>1，先用xml配置一个最简单的SpringMVC项目，并且能够在Tomcat中运行起来；<br>2，在已有的web.xml中把DispatcherServlet改为我们自己写的CustomDispatcherServlet，再次部署项目到Tomcat中，也依然可以运行。</p>
+<h3 id="1，配置一个最简单的SPRINGMVC项目，看下我的目录结构："><a href="#1，配置一个最简单的SPRINGMVC项目，看下我的目录结构：" class="headerlink" title="1，配置一个最简单的SPRINGMVC项目，看下我的目录结构："></a>1，配置一个最简单的SPRINGMVC项目，看下我的目录结构：</h3><p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203297363.jpg" alt="enter description here"></p>
+<p>在web.xml中配置DispatcherServlet和必要的启动参数，还有其映射路径：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203307781.jpg" alt="enter description here"></p>
+<p>spring-test.xml中开启component-scan扫描controller相应包，还有配置一个InternalResourceViewResolver视图解析器：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203318210.jpg" alt="enter description here"></p>
+<p>resource包下写个Hello的controller类：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203331089.jpg" alt="enter description here"></p>
+<p>index.jsp 简单的一个跳转链接：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203346929.jpg" alt="enter description here"></p>
+<p>Hello.jsp 就是say hello而已：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504203358779.jpg" alt="enter description here"></p>
+<p>然后配置一下Tomcat，启动项目访问，点击SayHello链接可以进行页面的跳转说明已经成功了！</p>
+<h3 id="2，把DISPATCHERSERVLET改为自己手写的CUSTOMDISPATCHERSERVLET"><a href="#2，把DISPATCHERSERVLET改为自己手写的CUSTOMDISPATCHERSERVLET" class="headerlink" title="2，把DISPATCHERSERVLET改为自己手写的CUSTOMDISPATCHERSERVLET"></a>2，把DISPATCHERSERVLET改为自己手写的CUSTOMDISPATCHERSERVLET</h3><p>接下来就到了重量级的手写CustomDispatcherServlet了，回顾一下DispatcherServlet的主要职责：</p>
+<ul>
+<li>自己维持mvc的HandlerMapping,HandlerAdapters等元素，对其进行初始化</li>
+<li>doDispatch分发各类的请求</li>
+</ul>
+<p>我们主要实现这两部分就ok了，我们的CustomDispatcherServlet继承FrameworkServlet，只有必须的三个成员属性：<br><strong>HandlerMapping,HanlderAdatper,ViewResolver</strong></p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235460250.jpg" alt="enter description here"></p>
+<p>1，实现onRefresh方法，从FrameworkServlet已经初始化成功的web上下文或者整个应用的根上下文中寻找三个成员属性的实例，对其进行初始化：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235471339.jpg" alt="enter description here"></p>
+<p>initHandlerMappings实现：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235484938.jpg" alt="enter description here"></p>
+<p>initHandlerAdapters和initHandlerMapping的实现差不多，intViewResolver是直接获取配置的InternalResourceViewResolver:</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235496771.jpg" alt="enter description here"></p>
+<p>2，重写doService方法，完成对Http请求的处理：</p>
+<p>doService设置了必要的参数，后面的视图的渲染需要用到web上下文，所以需要把webapplicationcontext设置到请求域中，但是name不能随便命名，必须是DispatcherServlet.CONTEXT，这个留到后面再看下具体实现，以及将分发任务委托给doDispatch。</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235514808.jpg" alt="enter description here"></p>
+<p>doDispatch ：对请求获取其对应的Handler，然后生存ModelAndView，最后进行视图的渲染即可：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235533222.jpg" alt="enter description here"></p>
+<p>getHandlerExecution 就是简单的遍历所有的HandlerMapping，依次执行getHandler方法，若不为空就直接用：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235549929.jpg" alt="enter description here"></p>
+<p>getHandlerAdapter 也是遍历所有的HandlerAdapters，依次判断是否支持该请求对应的handler，支持的话直接返回：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235564616.jpg" alt="enter description here"></p>
+<p>最后是视图的渲染render ：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235578030.jpg" alt="enter description here"></p>
+<p>写到这里，大功告成。</p>
+<p>马上用自己的DispatcherServlet来处理请求，把web.xml中的DispatcherServlet去掉，换上自己的：</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235592704.jpg" alt="enter description here"></p>
+<p>然后在Tomcat中运行，点击链接SayHello:</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235602893.jpg" alt="enter description here"></p>
+<p>成功跳转！</p>
+<p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504235614150.jpg" alt="enter description here"></p>
+<p>哇，成就感满满的，手写一个SpringMVC框架指日可待了。</p>
+<h2 id="三，结尾"><a href="#三，结尾" class="headerlink" title="三，结尾"></a>三，结尾</h2><p>源码：<a href="https://github.com/151250010/TestWeb" target="_blank" rel="external">https://github.com/151250010/TestWeb</a></p>
+<p>三个遗留问题下篇博客或下下篇解决：</p>
+<ul>
+<li>HanlderMapping 的 键值对是怎么设置的，以及getHandler又是怎么获取到HandlerExecutionChain的</li>
+<li>HandlerAdapter.handle() 生成ModelAndView 到底怎么实现的</li>
+<li>视图的渲染具体怎么实现的</li>
+</ul>
+
       
 
       
@@ -363,10 +312,82 @@ var _hmt = _hmt || [];
       
 
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          深入解读springmvc--3，剖析RequestMappingHandlerMapping
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深入解读springmvc--1，摸清DispatcherServlet</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -381,324 +402,39 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--1，摸清DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/">深入解读springmvc--1，摸清DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-13T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。</p>
-<p>打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个web应用程序的入口点，捕获了所有的请求，进行分析找到相应的控制器和方法来处理这个请求，然后生成模型和视图，最后由视图来进行渲染自身。</p>
-<blockquote>
-<p>整篇博客分为三个部分：</p>
-</blockquote>
-<ul>
-<li>了解Java Servlet</li>
-<li>DispatcherServlet的继承关系</li>
-<li>DispatcherServlet初始化做的每一步的工作</li>
-</ul>
-<blockquote>
-<p>下一篇博客会继续分析DispatcherServlet:</p>
-</blockquote>
-<ul>
-<li>mvc处理Http请求的具体流程</li>
-<li>自己实现一个A货DispatcherServlet</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一，一个Http请求进入SpringMVC的完整流程："><span class="toc-number">1.</span> <span class="toc-text">一，一个Http请求进入SpringMVC的完整流程：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二，订制自己的DispatcherServlet"><span class="toc-number">2.</span> <span class="toc-text">二，订制自己的DispatcherServlet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，配置一个最简单的SPRINGMVC项目，看下我的目录结构："><span class="toc-number">2.1.</span> <span class="toc-text">1，配置一个最简单的SPRINGMVC项目，看下我的目录结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，把DISPATCHERSERVLET改为自己手写的CUSTOMDISPATCHERSERVLET"><span class="toc-number">2.2.</span> <span class="toc-text">2，把DISPATCHERSERVLET改为自己手写的CUSTOMDISPATCHERSERVLET</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三，结尾"><span class="toc-number">3.</span> <span class="toc-text">三，结尾</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-带你入门travis-ci" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/带你入门travis-ci/">带你入门travis-ci</a>
-    </h1>
   
 
-        
-        <a href="/2017/08/08/带你入门travis-ci/" class="archive-article-date">
-  	<time datetime="2017-08-08T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，travis-ci-简单介绍"><a href="#一，travis-ci-简单介绍" class="headerlink" title="一，travis-ci 简单介绍"></a>一，travis-ci 简单介绍</h2><p>travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不失为一个很好的选择。</p>
-        
-          <a class="article-more-a" href="/2017/08/08/带你入门travis-ci/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">travis-ci</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-yilia的个人配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/yilia的个人配置/">yilia的个人配置</a>
-    </h1>
+  <div id="SOHUCS" sid="深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "cyt8Y7w50"; 
+var conf = "prod_147703479bb2596139f77f6050e47188"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
   
 
-        
-        <a href="/2017/08/05/yilia的个人配置/" class="archive-article-date">
-  	<time datetime="2017-08-05T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，theme配置文件的修改"><a href="#一，theme配置文件的修改" class="headerlink" title="一，theme配置文件的修改"></a>一，theme配置文件的修改</h2><p>yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。</p>
-<p><img src="/assets/images/yilia的个人配置/1504195372695.jpg" alt="enter description here"></p>
-<p>可以参考主题作者的配置：<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a></p>
-<p>还有的是主题作者的博客备份:<a href="https://github.com/litten/BlogBackup" target="_blank" rel="external">https://github.com/litten/BlogBackup</a></p>
-        
-          <a class="article-more-a" href="/2017/08/05/yilia的个人配置/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-十分钟完成个人博客的搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/十分钟完成个人博客的搭建/">十分钟完成个人博客的搭建</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/03/十分钟完成个人博客的搭建/" class="archive-article-date">
-  	<time datetime="2017-08-03T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>寒假放假的时候学了一点vue，简单用vue和php搭建的<a href="https://github.com/151250010/myblog" target="_blank" rel="external">个人博客</a>现在看来有很多的不足，不支持markdown，写博客必须要手写html的，所以这天用hexo搭建github pages个人博客，把流程记录一下，需要的人可以看下，一切顺利的话真的十分钟足够了。</p>
-        
-          <a class="article-more-a" href="/2017/08/03/十分钟完成个人博客的搭建/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -721,8 +457,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

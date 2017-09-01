@@ -6,17 +6,40 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>深入解读springmvc--3，剖析RequestMappingHandlerMapping | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="曾锡豪的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="又到了我最喜欢的啃代码时间。  一，前言 上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：   1, init DispatcherServlet2, begin to refresh webapplicatio">
+<meta name="keywords" content="springmvc源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入解读springmvc--3，剖析RequestMappingHandlerMapping">
+<meta property="og:url" content="http://yoursite.com/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="曾锡豪的个人博客">
+<meta property="og:description" content="又到了我最喜欢的啃代码时间。  一，前言 上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：   1, init DispatcherServlet2, begin to refresh webapplicatio">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236077006.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236232901.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237176346.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237187007.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237273672.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237285595.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237300219.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237324162.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237337448.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237351319.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237356605.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237369696.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237397499.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237403364.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237441417.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237906841.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237920810.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237951393.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237968632.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504238018228.jpg">
+<meta property="og:updated_time" content="2017-09-01T04:33:54.238Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="曾锡豪的个人博客">
+<meta name="twitter:title" content="深入解读springmvc--3，剖析RequestMappingHandlerMapping">
+<meta name="twitter:description" content="又到了我最喜欢的啃代码时间。  一，前言 上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：   1, init DispatcherServlet2, begin to refresh webapplicatio">
+<meta name="twitter:image" content="http://yoursite.com/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236077006.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -152,95 +175,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-深入解读springmvc--4，自定义一个RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-深入解读springmvc--3，剖析RequestMappingHandlerMapping" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/">深入解读springmvc--4，自定义一个RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-23T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>又到了找成就感的深度定制SpringMVC组件的时间，这次我想依托已有的IOC容器，完全自己实现一个发现HandlerMethod以及能够正确处理请求的简化版RequestMappingHandlerMapping，简单处理路径以及请求方法的匹配，对于参数，请求头，跨域请求等先不处理。</p>
-</blockquote>
-<p>其实RequestMappingHandlerMapping主要有两个功能需要实现：</p>
-<ul>
-<li>initHandlerMethods() 发现所有的RequestMapping处理方法，以及将他们保存进入内存等待检索</li>
-<li>getHandler() 检索内存中的处理方法，找到Http请求对应的最佳处理方法，并且可以匹配ant风格的路径检索，还有就是拦截器的处理。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--3，剖析RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/">深入解读springmvc--3，剖析RequestMappingHandlerMapping</a>
+    <h1 class="article-title" itemprop="name">
+      深入解读springmvc--3，剖析RequestMappingHandlerMapping
     </h1>
   
 
@@ -261,173 +203,128 @@ var _hmt = _hmt || [];
 </blockquote>
 <p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236077006.jpg" alt="enter description here"></p>
 <p>1, init DispatcherServlet<br>2, begin to refresh webapplicationcontext for DispatcherServlet whose namespace is “dispatcherServlet-servlet”<br>3, load bean definitions from the xml configuration declared by contextConfigLocation in initParam of dispatcherServlet<br>4, RequestMappingHandlerMapping tries to map and save all (url，handler) defined by @RequestMapping<br>5, RequestMappingHandlerAdapter tries to look for all exception handler defined by @ControllerAdvice<br>6, SimpleUrlRequestMapping register a handler DefaultServletHttpRequestHandler for path [\/**]<br>7, init DispatcherServlet successfully</p>
-        
-          <a class="article-more-a" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/">深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-16T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，一个Http请求进入SpringMVC的完整流程："><a href="#一，一个Http请求进入SpringMVC的完整流程：" class="headerlink" title="一，一个Http请求进入SpringMVC的完整流程："></a>一，一个Http请求进入SpringMVC的完整流程：</h2><p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504202988871.jpg" alt="enter description here"></p>
-        
-          <a class="article-more-a" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--1，摸清DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/">深入解读springmvc--1，摸清DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-13T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。</p>
-<p>打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个web应用程序的入口点，捕获了所有的请求，进行分析找到相应的控制器和方法来处理这个请求，然后生成模型和视图，最后由视图来进行渲染自身。</p>
+<a id="more"></a>
+<p>可以看到核心是RequestMappingHandlerMapping以及RequestMappingHandlerAdapter，HandlerMapping是处理请求映射的处理器，HandlerAdapter是适配器，负责动态调用方法以及处理参数，静态资源的请求使用的Handler是ResourceHttpRequestHandler对应的HandlerAdapter也是不一样的，但是我们最常用的还是@RequestMapping注解然后调用方法处理请求的方式，这种情况下使用的是HandlerMethod作为Handler，对应的HandlerMapping就是RequestMappingHandlerMapping，接下来我们深入剖析一下RequestMappingHandlerMapping。</p>
+<h2 id="二，RequestMappingHandlerMapping-的继承关系"><a href="#二，RequestMappingHandlerMapping-的继承关系" class="headerlink" title="二，RequestMappingHandlerMapping 的继承关系"></a>二，RequestMappingHandlerMapping 的继承关系</h2><p>如图：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236232901.jpg" alt="enter description here"></p>
+<table>
+<thead>
+<tr>
+<th>关键类或者接口</th>
+<th>主要实现的功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aware接口</td>
+<td>实现了Aware接口或者各种子接口的类，并且都交由IOC容器进行管理的话，会注入需要的上下文环境或者是 ServletContext</td>
+</tr>
+<tr>
+<td>EmbeddedValueResolverAware 接口</td>
+<td>注入一个Spring提供的EmbeddedValueResolver用于进行配置的读取</td>
+</tr>
+<tr>
+<td>ServletContextAware接口</td>
+<td>获取当前类运行的ServletContext</td>
+</tr>
+<tr>
+<td>ApplicationContextAware接口</td>
+<td>获取当前实现类运行的上下文环境</td>
+</tr>
+<tr>
+<td>WebApplicaionObjectSupport抽象类</td>
+<td>运行在Web上下文的类的基类，继承该类就可以获取各种上下文以及ServletContext</td>
+</tr>
+<tr>
+<td>Ordered接口</td>
+<td>实现该接口的类，可以进行优先级排序，优先级为0就是最高优先级，RequestMappingHandlerMapping优先级就是0，表示是没有意外的话，使用的HandlerMapping都是RequestMappingHandlerMapping</td>
+</tr>
+<tr>
+<td>AbstractHandlerMapping</td>
+<td>实现了一系列功能的HandlerMapping基类，持有一个Handler以及拦截器列表</td>
+</tr>
+<tr>
+<td>InitializingBean接口</td>
+<td>用于初始化bean之后提供一个回调函数进行需要的操作</td>
+</tr>
+<tr>
+<td>HandlerMethod</td>
+<td>提供了对一个处理器方法的封装，对外提供一系列的和方法相关的操作</td>
+</tr>
+<tr>
+<td>AbstractHandlerMethodMapping抽象类</td>
+<td>对于所有的(url,HandlerMethod)的方法匹配的HandlerMapping提供了基类，并且初始化了所有HandlerMethod与对应的请求路径之间的匹配</td>
+</tr>
+<tr>
+<td>RequestMappingInfoHandlerMapping</td>
+<td>使用RequestMappingInfo来定义HandlerMethod与request之间的映射的基类</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三，handlerMethod-初始化-以及-getHandler的流程"><a href="#三，handlerMethod-初始化-以及-getHandler的流程" class="headerlink" title="三，handlerMethod 初始化 以及 getHandler的流程"></a>三，handlerMethod 初始化 以及 getHandler的流程</h2><p>initHandlerMethods:</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237176346.jpg" alt="enter description here"></p>
+<p>getHandler的处理流程：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237187007.jpg" alt="enter description here"></p>
+<p>具体看下两个流程的实现：</p>
+<h3 id="3-1，把所有CONTROLLER的METHODS与其对应的HANDLERMAPPINGINFO-记录到内存"><a href="#3-1，把所有CONTROLLER的METHODS与其对应的HANDLERMAPPINGINFO-记录到内存" class="headerlink" title="3.1，把所有CONTROLLER的METHODS与其对应的HANDLERMAPPINGINFO 记录到内存"></a>3.1，把所有CONTROLLER的METHODS与其对应的HANDLERMAPPINGINFO 记录到内存</h3><p>1，<br>AbstractHandlerMethodMapping 实现了InitializingBean 接口，有一个回调函数，IOC容器初始化HandlerMapping实例完成之前，会调用其afterPropertiesSet方法，而afterPropertiesSet方法调用自身的initHandlerMethods:</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237273672.jpg" alt="enter description here"></p>
+<p>2，<br>initHandlerMethods 从默认当前的上下文中获取所有的带有@Controller 以及@RequestMapping注解的实例，并且获取其中的所有的HandlerMethod保存到内存之中。</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237285595.jpg" alt="enter description here"></p>
 <blockquote>
-<p>整篇博客分为三个部分：</p>
+<p>isHandler 在RequestMappingHandlerMapping 之中实现：</p>
 </blockquote>
-<ul>
-<li>了解Java Servlet</li>
-<li>DispatcherServlet的继承关系</li>
-<li>DispatcherServlet初始化做的每一步的工作</li>
-</ul>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237300219.jpg" alt="enter description here"></p>
+<p>3，<br>detectHandlerMethods 获取每个handler类中的所有的提供url映射的(Method,T mapping)的所有映射集合，并且保存到内存之中去：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237324162.jpg" alt="enter description here"></p>
 <blockquote>
-<p>下一篇博客会继续分析DispatcherServlet:</p>
+<p>getMappingForMethod在RequestMappingHandlerMapping之中实现了，获取类Handler上以及HandlerMethod的RequestMapping的属性构造RequestMappingInfo，并且最后进行合并：</p>
 </blockquote>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237337448.jpg" alt="enter description here"></p>
+<blockquote>
+<p>createRequestMappingInfo ，用获取到的RequestMapping中的属性生产RequestMappingInfo:</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237351319.jpg" alt="enter description here"></p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237356605.jpg" alt="enter description here"></p>
+<blockquote>
+<p>在获取到所有的methods之后，把信息注册到内存之中，以后getHandler实现的，只是从内存map的检索就可以了：</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237369696.jpg" alt="enter description here"></p>
+<p>4，<br>最后initHanlderMethods方法还提供了一个模板方法，供子类在方法与其映射初始化之后进行进一步的操作：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237397499.jpg" alt="enter description here"></p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237403364.jpg" alt="enter description here"></p>
+<h3 id="3-2，GETHANDLER-获取与请求对应的HANDLEREXECUTIONCHAIN的具体流程："><a href="#3-2，GETHANDLER-获取与请求对应的HANDLEREXECUTIONCHAIN的具体流程：" class="headerlink" title="3.2，GETHANDLER 获取与请求对应的HANDLEREXECUTIONCHAIN的具体流程："></a>3.2，GETHANDLER 获取与请求对应的HANDLEREXECUTIONCHAIN的具体流程：</h3><p>1，<br>AbstractHandlerMapping中实现了final方法getHandler：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237441417.jpg" alt="enter description here"></p>
+<blockquote>
+<p>主要分三步：getHandlerInternal, getHandlerExecutionChain, getCorsHandlerExecutionChain</p>
+</blockquote>
+<p>2，<br>getHandlerInternal 方法是一个模板方法，留给子类实现的，在AbstractHandlerMethodMapping中实现了：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237906841.jpg" alt="enter description here"></p>
+<blockquote>
+<p>主要是lookupHandlerMethod的实现：</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237920810.jpg" alt="enter description here"></p>
+<blockquote>
+<p>Match是匹配当前请求的(T mapping, HandlerMethod method)的封装，addMatchingMappings()先往matches列表中增加所有匹配当前请求的Match，接下来根据子类实现的getMappingComparator方法对Match进行排序，直接返回优先级最高的Match之中的HandlerMethod。</p>
+</blockquote>
+<p>看下addMatchMappings的实现：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237951393.jpg" alt="enter description here"></p>
+<p>3，<br>getHandlerExecutionChain简单的判断一下是不是匹配某个路径的拦截器还是对所有请求路径都适用，然后加入到handlerExecutionChain中：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504237968632.jpg" alt="enter description here"></p>
+<p>4，<br>最后看一下RequestMappingHandlerMapping：</p>
+<p>其实RequestMappingHandlerMapping做到事情并不多，主要四部分：</p>
 <ul>
-<li>mvc处理Http请求的具体流程</li>
-<li>自己实现一个A货DispatcherServlet</li>
+<li><p>在调用afterPropertiesSet回调函数之前，用AbstractHandlerMapping中的各种属性实例化自身的config：</p>
+<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504238018228.jpg" alt="enter description here"></p>
+</li>
 </ul>
-        
-          <a class="article-more-a" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/#more">more >></a>
-        
+<ul>
+<li>重写了initHandlerMethods时的两个子类的实现：isHandler以及getMappingForMethod</li>
+<li>重写了AbstractHandlerMethodMapping之中的initCorsConfiguration跨域配置初始化实现</li>
+<li>实现了MatchableHandlerMapping的match方法，判断一个请求是否符合标准</li>
+</ul>
+<h2 id="四，结尾"><a href="#四，结尾" class="headerlink" title="四，结尾"></a>四，结尾</h2><p>主要两条主线还是很清晰的。</p>
+<p>下一篇实现自定义一个HandlerMapping。</p>
+
       
 
       
@@ -442,10 +339,6 @@ var _hmt = _hmt || [];
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
       		
 		</ul>
 	</div>
@@ -455,10 +348,82 @@ var _hmt = _hmt || [];
       
 
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          深入解读springmvc--4，自定义一个RequestMappingHandlerMapping
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -473,232 +438,39 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-带你入门travis-ci" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/带你入门travis-ci/">带你入门travis-ci</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/08/带你入门travis-ci/" class="archive-article-date">
-  	<time datetime="2017-08-08T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，travis-ci-简单介绍"><a href="#一，travis-ci-简单介绍" class="headerlink" title="一，travis-ci 简单介绍"></a>一，travis-ci 简单介绍</h2><p>travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不失为一个很好的选择。</p>
-        
-          <a class="article-more-a" href="/2017/08/08/带你入门travis-ci/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">travis-ci</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一，前言"><span class="toc-number">1.</span> <span class="toc-text">一，前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二，RequestMappingHandlerMapping-的继承关系"><span class="toc-number">2.</span> <span class="toc-text">二，RequestMappingHandlerMapping 的继承关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三，handlerMethod-初始化-以及-getHandler的流程"><span class="toc-number">3.</span> <span class="toc-text">三，handlerMethod 初始化 以及 getHandler的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1，把所有CONTROLLER的METHODS与其对应的HANDLERMAPPINGINFO-记录到内存"><span class="toc-number">3.1.</span> <span class="toc-text">3.1，把所有CONTROLLER的METHODS与其对应的HANDLERMAPPINGINFO 记录到内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2，GETHANDLER-获取与请求对应的HANDLEREXECUTIONCHAIN的具体流程："><span class="toc-number">3.2.</span> <span class="toc-text">3.2，GETHANDLER 获取与请求对应的HANDLEREXECUTIONCHAIN的具体流程：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四，结尾"><span class="toc-number">4.</span> <span class="toc-text">四，结尾</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-yilia的个人配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/yilia的个人配置/">yilia的个人配置</a>
-    </h1>
   
 
-        
-        <a href="/2017/08/05/yilia的个人配置/" class="archive-article-date">
-  	<time datetime="2017-08-05T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，theme配置文件的修改"><a href="#一，theme配置文件的修改" class="headerlink" title="一，theme配置文件的修改"></a>一，theme配置文件的修改</h2><p>yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。</p>
-<p><img src="/assets/images/yilia的个人配置/1504195372695.jpg" alt="enter description here"></p>
-<p>可以参考主题作者的配置：<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a></p>
-<p>还有的是主题作者的博客备份:<a href="https://github.com/litten/BlogBackup" target="_blank" rel="external">https://github.com/litten/BlogBackup</a></p>
-        
-          <a class="article-more-a" href="/2017/08/05/yilia的个人配置/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-十分钟完成个人博客的搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/十分钟完成个人博客的搭建/">十分钟完成个人博客的搭建</a>
-    </h1>
+  <div id="SOHUCS" sid="深入解读springmvc--3，剖析RequestMappingHandlerMapping" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "cyt8Y7w50"; 
+var conf = "prod_147703479bb2596139f77f6050e47188"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
   
 
-        
-        <a href="/2017/08/03/十分钟完成个人博客的搭建/" class="archive-article-date">
-  	<time datetime="2017-08-03T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>寒假放假的时候学了一点vue，简单用vue和php搭建的<a href="https://github.com/151250010/myblog" target="_blank" rel="external">个人博客</a>现在看来有很多的不足，不支持markdown，写博客必须要手写html的，所以这天用hexo搭建github pages个人博客，把流程记录一下，需要的人可以看下，一切顺利的话真的十分钟足够了。</p>
-        
-          <a class="article-more-a" href="/2017/08/03/十分钟完成个人博客的搭建/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -721,8 +493,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

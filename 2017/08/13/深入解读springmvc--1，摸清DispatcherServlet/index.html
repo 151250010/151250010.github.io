@@ -6,17 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>深入解读springmvc--1，摸清DispatcherServlet | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="曾锡豪的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="一，前言很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。 打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个">
+<meta name="keywords" content="springmvc源码,custom spring mvc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入解读springmvc--1，摸清DispatcherServlet">
+<meta property="og:url" content="http://yoursite.com/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="曾锡豪的个人博客">
+<meta property="og:description" content="一，前言很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。 打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504201913380.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504201950709.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202068809.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202306851.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202316825.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202423436.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202520975.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202531347.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202562066.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202572563.jpg">
+<meta property="og:updated_time" content="2017-09-01T03:35:06.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="曾锡豪的个人博客">
+<meta name="twitter:title" content="深入解读springmvc--1，摸清DispatcherServlet">
+<meta name="twitter:description" content="一，前言很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。 打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个">
+<meta name="twitter:image" content="http://yoursite.com/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504201913380.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -152,250 +165,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-深入解读springmvc--4，自定义一个RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-深入解读springmvc--1，摸清DispatcherServlet" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/">深入解读springmvc--4，自定义一个RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-23T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>又到了找成就感的深度定制SpringMVC组件的时间，这次我想依托已有的IOC容器，完全自己实现一个发现HandlerMethod以及能够正确处理请求的简化版RequestMappingHandlerMapping，简单处理路径以及请求方法的匹配，对于参数，请求头，跨域请求等先不处理。</p>
-</blockquote>
-<p>其实RequestMappingHandlerMapping主要有两个功能需要实现：</p>
-<ul>
-<li>initHandlerMethods() 发现所有的RequestMapping处理方法，以及将他们保存进入内存等待检索</li>
-<li>getHandler() 检索内存中的处理方法，找到Http请求对应的最佳处理方法，并且可以匹配ant风格的路径检索，还有就是拦截器的处理。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--3，剖析RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/">深入解读springmvc--3，剖析RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-19T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>又到了我最喜欢的啃代码时间。</p>
-</blockquote>
-<h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：</p>
-</blockquote>
-<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236077006.jpg" alt="enter description here"></p>
-<p>1, init DispatcherServlet<br>2, begin to refresh webapplicationcontext for DispatcherServlet whose namespace is “dispatcherServlet-servlet”<br>3, load bean definitions from the xml configuration declared by contextConfigLocation in initParam of dispatcherServlet<br>4, RequestMappingHandlerMapping tries to map and save all (url，handler) defined by @RequestMapping<br>5, RequestMappingHandlerAdapter tries to look for all exception handler defined by @ControllerAdvice<br>6, SimpleUrlRequestMapping register a handler DefaultServletHttpRequestHandler for path [\/**]<br>7, init DispatcherServlet successfully</p>
-        
-          <a class="article-more-a" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/">深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-16T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，一个Http请求进入SpringMVC的完整流程："><a href="#一，一个Http请求进入SpringMVC的完整流程：" class="headerlink" title="一，一个Http请求进入SpringMVC的完整流程："></a>一，一个Http请求进入SpringMVC的完整流程：</h2><p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504202988871.jpg" alt="enter description here"></p>
-        
-          <a class="article-more-a" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--1，摸清DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/">深入解读springmvc--1，摸清DispatcherServlet</a>
+    <h1 class="article-title" itemprop="name">
+      深入解读springmvc--1，摸清DispatcherServlet
     </h1>
   
 
@@ -425,9 +202,101 @@ var _hmt = _hmt || [];
 <li>mvc处理Http请求的具体流程</li>
 <li>自己实现一个A货DispatcherServlet</li>
 </ul>
-        
-          <a class="article-more-a" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/#more">more >></a>
-        
+<a id="more"></a>
+<h2 id="二，了解Java-Servlet"><a href="#二，了解Java-Servlet" class="headerlink" title="二，了解Java Servlet"></a>二，了解Java Servlet</h2><p>什么是Servlet呢，servlet是一个java类，是服务器端运行的一个小程序，并且看可以通过<strong>请求-响应</strong>编程模型来访问的服务器内存中的程序。</p>
+<p>java实现servlet的三种方式：</p>
+<h3 id="1，java定义好了servlet的接口，我们直接实现其即可："><a href="#1，java定义好了servlet的接口，我们直接实现其即可：" class="headerlink" title="1，java定义好了servlet的接口，我们直接实现其即可："></a>1，java定义好了servlet的接口，我们直接实现其即可：</h3><p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504201913380.jpg" alt="enter description here"></p>
+<p>五个方法：</p>
+<ul>
+<li>init: servlet被Servlet容器实例化的时候就调用，如果init方法抛出ServletException或者是没有在规定时间内return那么容器就会直接忽视这个Servlet</li>
+<li>getServletConfig: 获得Servlet初始化的配置</li>
+<li>service: 被Servlet容器调用进行请求的处理</li>
+<li>getServletInfo: 获取Servlet的信息</li>
+<li>destroy: 当Servlet服务完成之后由容器调用，进行资源的释放等操作</li>
+</ul>
+<p>实现了Servlet接口，就可以放在Servlet容器中，在web.xml配置中配置Servlet和其对应的响应路径即可。给出一个简单的例子：</p>
+<p>项目结构：</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504201950709.jpg" alt="enter description here"></p>
+<p>web.xml配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>xihao<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.test.xihao.XihaoWeb<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"> </div><div class="line"> <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>xihao<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/xihao<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>XihaoWeb就是一个简单实现了Servlet接口的类，然后把整个项目部署到tomcat中即可。</p>
+<h3 id="2，继承GenericServlet"><a href="#2，继承GenericServlet" class="headerlink" title="2，继承GenericServlet"></a>2，继承GenericServlet</h3><p>GenericServlet是一个通用的，不依赖具体协议的Servlet，实现了Servlet,ServletConfig接口，还实现了log方法，只需要继承GenericServlet，实现一个抽象方法service即可。</p>
+<p>然后在web.xml中声明其映射。</p>
+<h3 id="3，继承HttpServlet"><a href="#3，继承HttpServlet" class="headerlink" title="3，继承HttpServlet"></a>3，继承HttpServlet</h3><p>具体的Http协议的实现，继承了GenericServlet，最通用的一种实现servlet的方式就是直接继承HttpServlet然后重写其中的:</p>
+<ul>
+<li>doGet</li>
+<li>doPost</li>
+<li>doPut</li>
+<li>doDelete</li>
+<li>init</li>
+<li>getServletInfo<br>等方法即可。</li>
+</ul>
+<h2 id="三，DispatcherServlet的继承关系"><a href="#三，DispatcherServlet的继承关系" class="headerlink" title="三，DispatcherServlet的继承关系"></a>三，DispatcherServlet的继承关系</h2><p>springmvc源码错综复杂，就是一个庞大的蜘蛛网，我们的思路一定要清晰，先从DispatcherServlet的继承关系下手，看下其继承关系:</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202068809.jpg" alt="enter description here"></p>
+<blockquote>
+<p>HttpServletBean</p>
+</blockquote>
+<p>HttpServletBean 实现了EnvironmentCapable,EnvironmentAware接口，可以自定义web运行的环境，继承HttpServlet，主要需要注意的是初始化的时候完成了web容器的依赖注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">		<span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</div><div class="line">			logger.debug(<span class="string">"Initializing servlet '"</span> + getServletName() + <span class="string">"'"</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// Set bean properties from init parameters.</span></div><div class="line">		PropertyValues pvs = <span class="keyword">new</span> ServletConfigPropertyValues(getServletConfig(), <span class="keyword">this</span>.requiredProperties);</div><div class="line">		<span class="keyword">if</span> (!pvs.isEmpty()) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(<span class="keyword">this</span>);</div><div class="line">				<span class="comment">//从ServletContext中获取Bean属性参数，然后进行web容器的依赖注入</span></div><div class="line">				ResourceLoader resourceLoader = <span class="keyword">new</span> ServletContextResourceLoader(getServletContext());</div><div class="line">				bw.registerCustomEditor(Resource.class, <span class="keyword">new</span> ResourceEditor(resourceLoader, getEnvironment()));</div><div class="line">				initBeanWrapper(bw);</div><div class="line">				bw.setPropertyValues(pvs, <span class="keyword">true</span>);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">catch</span> (BeansException ex) &#123;</div><div class="line">				<span class="keyword">if</span> (logger.isErrorEnabled()) &#123;</div><div class="line">					logger.error(<span class="string">"Failed to set bean properties on servlet '"</span> + getServletName() + <span class="string">"'"</span>, ex);</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">throw</span> ex;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//子类自己实现ServletBean具体的初始化</span></div><div class="line">		initServletBean();</div><div class="line">		<span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</div><div class="line">			logger.debug(<span class="string">"Servlet '"</span> + getServletName() + <span class="string">"' configured successfully"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>FrameworkServlet</p>
+</blockquote>
+<p>SpringMvc框架的基层Servlet，提供了在bean层面上与Spring应用上下文的集成，主要实现了三个功能：</p>
+<ul>
+<li>基于每个Servlet的命名空间中的beans，为每个Servlet实例化一个WebApplicationContext，并对其进行管理</li>
+<li>在处理请求上发布事件，不管请求是否成功</li>
+<li>完成了Servlet上下文的建立之后，子类实现onRefresh方法，完成IOC容器的初始化</li>
+</ul>
+<p>子类必须覆盖其doService方法实现具体的请求处理逻辑。</p>
+<blockquote>
+<p>DispatcherServlet</p>
+</blockquote>
+<p>作为一个前端控制器，所有的web请求都需要通过它进行处理，进行转发，匹配，数据处理后，并由页面进行处理。是SpringMvc的核心。</p>
+<p>主要实现的功能可以分为两个部分：</p>
+<ul>
+<li>初始化部分，主要在initWebApplicationContext中，对web模块需要的bean进行了初始化</li>
+<li>对Http请求进行响应，主要在doDispatch中实现</li>
+</ul>
+<h2 id="四，DispatcherServlet的执行链"><a href="#四，DispatcherServlet的执行链" class="headerlink" title="四，DispatcherServlet的执行链"></a>四，DispatcherServlet的执行链</h2><p>DispatcherServle怎么样处理Http请求的呢，还有初始化的时候具体做了些什么呢？</p>
+<p>看下两条主线：</p>
+<p>DispatcherServlet自身IOC容器的初始化：</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202306851.jpg" alt="enter description here"></p>
+<p>处理Http请求：</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202316825.jpg" alt="enter description here"></p>
+<h3 id="1，DISPATCHERSERVLET的初始化"><a href="#1，DISPATCHERSERVLET的初始化" class="headerlink" title="1，DISPATCHERSERVLET的初始化"></a>1，DISPATCHERSERVLET的初始化</h3><p>DispatcherServlet自己持有一个IOC容器，整个web应用有一个根上下文，在ContextLoaderListener初始化的时候被建立了，并且被设置到WebApplicationContextUtils中去。</p>
+<p>然后可以理解为每个Servlet持有一个子上下文，DispatcherServlet的持有的WebApplicationContext以web应用的根上下文作为自己的parent(这个过程在FrameworkServlet中实现)。需要知道的是，在向IOC容器getBean的时候，首先会到双亲上下文中寻找，也就是说，整个web项目的根上下文定义的bean是可以被所有的子上下文共享的。</p>
+<p>具体看下FrameworkServlet中的initServletBean方法，以及一些注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> WebApplicationContext <span class="title">initWebApplicationContext</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//获取根上下文,使用这个作为当前mvc上下文的双亲上下文</span></div><div class="line">		WebApplicationContext rootContext =</div><div class="line">				WebApplicationContextUtils.getWebApplicationContext(getServletContext()); </div><div class="line">		WebApplicationContext wac = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.webApplicationContext != <span class="keyword">null</span>) &#123;</div><div class="line">			 <span class="comment">//构造函数时候已经注入了web应用上下文</span></div><div class="line">			wac = <span class="keyword">this</span>.webApplicationContext;</div><div class="line">			<span class="keyword">if</span> (wac <span class="keyword">instanceof</span> ConfigurableWebApplicationContext) &#123;</div><div class="line">				ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) wac;</div><div class="line">				<span class="keyword">if</span> (!cwac.isActive()) &#123;</div><div class="line">					<span class="comment">// The context has not yet been refreshed -&gt; provide services such as</span></div><div class="line">					<span class="comment">// setting the parent context, setting the application context id, etc</span></div><div class="line">					<span class="keyword">if</span> (cwac.getParent() == <span class="keyword">null</span>) &#123;</div><div class="line">						<span class="comment">//没有双亲上下文的话，设置上下文,可能为null</span></div><div class="line">						cwac.setParent(rootContext);</div><div class="line">					&#125;</div><div class="line">					<span class="comment">//对子上下文进行基本配置和最终调用IOC容器的refresh方法</span></div><div class="line">					configureAndRefreshWebApplicationContext(cwac);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (wac == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="comment">// 没有的话 就去ServletContext中找,找到的话 默认按照根上下文已经被设置并且用户已经执行了初始化来处理</span></div><div class="line">			wac = findWebApplicationContext();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (wac == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="comment">// 最后还是没有找到的话，创建一个</span></div><div class="line">			wac = createWebApplicationContext(rootContext);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (!<span class="keyword">this</span>.refreshEventReceived) &#123;</div><div class="line">			<span class="comment">// 还没有进行刷新事件的话</span></div><div class="line">			<span class="comment">// 如果创建的上下文不支持刷新或者是构造器注入的上下文已经被调用过refresh方法，在这里手动刷新</span></div><div class="line">			onRefresh(wac);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.publishContext) &#123;</div><div class="line">			<span class="comment">//把生成的子上下文设置到SevletContext中去</span></div><div class="line">			String attrName = getServletContextAttributeName();</div><div class="line">			getServletContext().setAttribute(attrName, wac);</div><div class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.logger.isDebugEnabled()) &#123;</div><div class="line">				<span class="keyword">this</span>.logger.debug(<span class="string">"Published WebApplicationContext of servlet '"</span> + getServletName() +</div><div class="line">						<span class="string">"' as ServletContext attribute with name ["</span> + attrName + <span class="string">"]"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> wac;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p><strong>FrameworkServlet</strong>中的onRefresh方法是空的，是一个模板留给子类实现。然后<strong>DispatcherServle</strong>t具体实现了onRefresh方法，调用自身的initStrategies方法，看下其具体实现：</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202423436.jpg" alt="enter description here"></p>
+<p>initStrategies(ApplicationContext context)就是mvc框架的各种实现元素的初始化，包括国际化的LocaleResolver，配置请求和controller映射的HandlerMappings等。</p>
+<p>上面的流程还有最后的两步没有打通，哪两步呢：</p>
+<ul>
+<li>configureAndRefreshWebApplicationContext方法和createWebApplicationContext的具体实现</li>
+<li>最后的以initHandlerMapping方法为例，最后的mvc组件的具体实例化又是怎么样的呢？</li>
+</ul>
+<blockquote>
+<p>两个方法解析：</p>
+</blockquote>
+<p>首先看下createWebApplicationContext:</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202520975.jpg" alt="enter description here"></p>
+<p>设置一些基本属性之后还是调用的configureAndRefreshWebApplicationContext方法，看下configureAndRefreshWebApplicationContext:</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202531347.jpg" alt="enter description here"></p>
+<p>其实就是设置一些基本的参数之后，然后进行容器的所有bean的实例化。</p>
+<blockquote>
+<p>initHandlerMapping具体解析：</p>
+</blockquote>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202562066.jpg" alt="enter description here"></p>
+<p>看下默认的配置，DispatcherServlet.properties：</p>
+<p><img src="/assets/images/深入解读springmvc--1，摸清DispatcherServlet/1504202572563.jpg" alt="enter description here"></p>
+<p>可以看到默认的HandlerMappings的具体实现是BeanNameUrlHandlerMapping和RequestMappingHandlerMapping。</p>
+<ul>
+<li>BeanNameUrlHandlerMapping 基于bean名字来匹配映射，举个例子就是有个/userName请求，会查找controller的name属性为”/userName”的controller，支持模糊匹配，”/user*”也可以匹配到”/userName”的controller。</li>
+<li>RequestMappingHandlerMapping 应该是最常用的一个解析器了吧，请求直接映射到@RequestMapping注解的类和方法上面。</li>
+</ul>
+<h2 id="五，结尾"><a href="#五，结尾" class="headerlink" title="五，结尾"></a>五，结尾</h2><p>写到这里已经是深夜的00：30了，这种源码阅读的操作简直就是在啃书一样，太过于晦涩了，错综复杂的调用关系以及层层继承下来，需要时刻保持头脑的高度清晰和集中。</p>
+<p>但是现在，整个DispatcherServlet初始化的步骤已经很明朗，流程贯通的话，还是有一点点的成就感的，清楚了各个步骤之后，我们就可以自己定制一个DispatcherServlet了，也可以按照自己的需求进行框架的深度定制，这些操作留到下一篇博客，给自己找一些成就感哈哈。</p>
+
       
 
       
@@ -455,10 +324,82 @@ var _hmt = _hmt || [];
       
 
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/08/带你入门travis-ci/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">带你入门travis-ci</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -473,232 +414,39 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-带你入门travis-ci" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/带你入门travis-ci/">带你入门travis-ci</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/08/带你入门travis-ci/" class="archive-article-date">
-  	<time datetime="2017-08-08T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，travis-ci-简单介绍"><a href="#一，travis-ci-简单介绍" class="headerlink" title="一，travis-ci 简单介绍"></a>一，travis-ci 简单介绍</h2><p>travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不失为一个很好的选择。</p>
-        
-          <a class="article-more-a" href="/2017/08/08/带你入门travis-ci/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">travis-ci</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一，前言"><span class="toc-number">1.</span> <span class="toc-text">一，前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二，了解Java-Servlet"><span class="toc-number">2.</span> <span class="toc-text">二，了解Java Servlet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，java定义好了servlet的接口，我们直接实现其即可："><span class="toc-number">2.1.</span> <span class="toc-text">1，java定义好了servlet的接口，我们直接实现其即可：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，继承GenericServlet"><span class="toc-number">2.2.</span> <span class="toc-text">2，继承GenericServlet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，继承HttpServlet"><span class="toc-number">2.3.</span> <span class="toc-text">3，继承HttpServlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三，DispatcherServlet的继承关系"><span class="toc-number">3.</span> <span class="toc-text">三，DispatcherServlet的继承关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四，DispatcherServlet的执行链"><span class="toc-number">4.</span> <span class="toc-text">四，DispatcherServlet的执行链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，DISPATCHERSERVLET的初始化"><span class="toc-number">4.1.</span> <span class="toc-text">1，DISPATCHERSERVLET的初始化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五，结尾"><span class="toc-number">5.</span> <span class="toc-text">五，结尾</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-yilia的个人配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/yilia的个人配置/">yilia的个人配置</a>
-    </h1>
   
 
-        
-        <a href="/2017/08/05/yilia的个人配置/" class="archive-article-date">
-  	<time datetime="2017-08-05T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，theme配置文件的修改"><a href="#一，theme配置文件的修改" class="headerlink" title="一，theme配置文件的修改"></a>一，theme配置文件的修改</h2><p>yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。</p>
-<p><img src="/assets/images/yilia的个人配置/1504195372695.jpg" alt="enter description here"></p>
-<p>可以参考主题作者的配置：<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a></p>
-<p>还有的是主题作者的博客备份:<a href="https://github.com/litten/BlogBackup" target="_blank" rel="external">https://github.com/litten/BlogBackup</a></p>
-        
-          <a class="article-more-a" href="/2017/08/05/yilia的个人配置/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-十分钟完成个人博客的搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/十分钟完成个人博客的搭建/">十分钟完成个人博客的搭建</a>
-    </h1>
+  <div id="SOHUCS" sid="深入解读springmvc--1，摸清DispatcherServlet" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "cyt8Y7w50"; 
+var conf = "prod_147703479bb2596139f77f6050e47188"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
   
 
-        
-        <a href="/2017/08/03/十分钟完成个人博客的搭建/" class="archive-article-date">
-  	<time datetime="2017-08-03T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>寒假放假的时候学了一点vue，简单用vue和php搭建的<a href="https://github.com/151250010/myblog" target="_blank" rel="external">个人博客</a>现在看来有很多的不足，不支持markdown，写博客必须要手写html的，所以这天用hexo搭建github pages个人博客，把流程记录一下，需要的人可以看下，一切顺利的话真的十分钟足够了。</p>
-        
-          <a class="article-more-a" href="/2017/08/03/十分钟完成个人博客的搭建/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -721,8 +469,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

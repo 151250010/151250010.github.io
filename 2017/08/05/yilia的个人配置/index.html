@@ -6,17 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>yilia的个人配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="曾锡豪的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="一，theme配置文件的修改yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。  可以参考主题作者的配置：https://github.com/litten/hexo-theme-yilia 还有的是主题作者的博客备份:https://github.com/litten/BlogBackup">
+<meta name="keywords" content="建站教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yilia的个人配置">
+<meta property="og:url" content="http://yoursite.com/2017/08/05/yilia的个人配置/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="曾锡豪的个人博客">
+<meta property="og:description" content="一，theme配置文件的修改yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。  可以参考主题作者的配置：https://github.com/litten/hexo-theme-yilia 还有的是主题作者的博客备份:https://github.com/litten/BlogBackup">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504195372695.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504195584297.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504195602109.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504198005053.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504198219512.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504198294481.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504200392647.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504200403632.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504200480400.jpg">
+<meta property="og:updated_time" content="2017-08-31T17:32:24.475Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="曾锡豪的个人博客">
+<meta name="twitter:title" content="yilia的个人配置">
+<meta name="twitter:description" content="一，theme配置文件的修改yilia的主要配置在themes/yilia/_config.yml中，我们对其进行需要的修改即可。  可以参考主题作者的配置：https://github.com/litten/hexo-theme-yilia 还有的是主题作者的博客备份:https://github.com/litten/BlogBackup">
+<meta name="twitter:image" content="http://yoursite.com/assets/images/yilia的个人配置/1504195372695.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -152,414 +164,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-深入解读springmvc--4，自定义一个RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-yilia的个人配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/">深入解读springmvc--4，自定义一个RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-23T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>又到了找成就感的深度定制SpringMVC组件的时间，这次我想依托已有的IOC容器，完全自己实现一个发现HandlerMethod以及能够正确处理请求的简化版RequestMappingHandlerMapping，简单处理路径以及请求方法的匹配，对于参数，请求头，跨域请求等先不处理。</p>
-</blockquote>
-<p>其实RequestMappingHandlerMapping主要有两个功能需要实现：</p>
-<ul>
-<li>initHandlerMethods() 发现所有的RequestMapping处理方法，以及将他们保存进入内存等待检索</li>
-<li>getHandler() 检索内存中的处理方法，找到Http请求对应的最佳处理方法，并且可以匹配ant风格的路径检索，还有就是拦截器的处理。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/23/深入解读springmvc--4，自定义一个RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--3，剖析RequestMappingHandlerMapping" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/">深入解读springmvc--3，剖析RequestMappingHandlerMapping</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/" class="archive-article-date">
-  	<time datetime="2017-08-19T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>又到了我最喜欢的啃代码时间。</p>
-</blockquote>
-<h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><blockquote>
-<p>上篇博客写过一个MVCSource项目，把web.xml中的CustomDispatcherServlet换为Spring的DispatcherServlet，运行的话，看server log会发现整个spring mvc的运行轨迹：</p>
-</blockquote>
-<p><img src="/assets/images/深入解读springmvc--3，剖析RequestMappingHandlerMapping/1504236077006.jpg" alt="enter description here"></p>
-<p>1, init DispatcherServlet<br>2, begin to refresh webapplicationcontext for DispatcherServlet whose namespace is “dispatcherServlet-servlet”<br>3, load bean definitions from the xml configuration declared by contextConfigLocation in initParam of dispatcherServlet<br>4, RequestMappingHandlerMapping tries to map and save all (url，handler) defined by @RequestMapping<br>5, RequestMappingHandlerAdapter tries to look for all exception handler defined by @ControllerAdvice<br>6, SimpleUrlRequestMapping register a handler DefaultServletHttpRequestHandler for path [\/**]<br>7, init DispatcherServlet successfully</p>
-        
-          <a class="article-more-a" href="/2017/08/19/深入解读springmvc--3，剖析RequestMappingHandlerMapping/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/">深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-16T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，一个Http请求进入SpringMVC的完整流程："><a href="#一，一个Http请求进入SpringMVC的完整流程：" class="headerlink" title="一，一个Http请求进入SpringMVC的完整流程："></a>一，一个Http请求进入SpringMVC的完整流程：</h2><p><img src="/assets/images/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/1504202988871.jpg" alt="enter description here"></p>
-        
-          <a class="article-more-a" href="/2017/08/16/深入解读springmvc--2，处理Http请求以及自定义一个DispatcherServlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深入解读springmvc--1，摸清DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/">深入解读springmvc--1，摸清DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-08-13T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>很惭愧最近没更新博客，闲的慌废寝忘食地看了几本小说，还好一周时间就看吐了，上周空闲之余粗略看了下Spring MVC的源码，先把上周的一些思路整理一下，走一下springmvc的流程。</p>
-<p>打算写一个springmvc系列的博客，从源码解读，到自己实现一个处理请求，生成视图和模型并且可以进行视图的解析的A货MVC框架。DispatcherServlet是整个SpringMvc框架的核心，是整个web应用程序的入口点，捕获了所有的请求，进行分析找到相应的控制器和方法来处理这个请求，然后生成模型和视图，最后由视图来进行渲染自身。</p>
-<blockquote>
-<p>整篇博客分为三个部分：</p>
-</blockquote>
-<ul>
-<li>了解Java Servlet</li>
-<li>DispatcherServlet的继承关系</li>
-<li>DispatcherServlet初始化做的每一步的工作</li>
-</ul>
-<blockquote>
-<p>下一篇博客会继续分析DispatcherServlet:</p>
-</blockquote>
-<ul>
-<li>mvc处理Http请求的具体流程</li>
-<li>自己实现一个A货DispatcherServlet</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/08/13/深入解读springmvc--1，摸清DispatcherServlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springmvc源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">custom spring mvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-带你入门travis-ci" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/带你入门travis-ci/">带你入门travis-ci</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/08/带你入门travis-ci/" class="archive-article-date">
-  	<time datetime="2017-08-08T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，travis-ci-简单介绍"><a href="#一，travis-ci-简单介绍" class="headerlink" title="一，travis-ci 简单介绍"></a>一，travis-ci 简单介绍</h2><p>travis-ci是专门为github项目提供服务的持续集成工具，支持大多数的主流语言，可以实现代码的自动编译，执行测试，测试结果报告和测试成功之后的自动部署。和jenkins类似，但是jenkins是开源的，支持自己定制化实现，并且不指定github，travis和jenkins比较还是差了许多的，但是项目的集成不是非常复杂并且使用github的话，travis不失为一个很好的选择。</p>
-        
-          <a class="article-more-a" href="/2017/08/08/带你入门travis-ci/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">travis-ci</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-yilia的个人配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/yilia的个人配置/">yilia的个人配置</a>
+    <h1 class="article-title" itemprop="name">
+      yilia的个人配置
     </h1>
   
 
@@ -576,9 +188,52 @@ var _hmt = _hmt || [];
 <p><img src="/assets/images/yilia的个人配置/1504195372695.jpg" alt="enter description here"></p>
 <p>可以参考主题作者的配置：<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a></p>
 <p>还有的是主题作者的博客备份:<a href="https://github.com/litten/BlogBackup" target="_blank" rel="external">https://github.com/litten/BlogBackup</a></p>
-        
-          <a class="article-more-a" href="/2017/08/05/yilia的个人配置/#more">more >></a>
-        
+<a id="more"></a>
+<h3 id="1，配置自己的头像"><a href="#1，配置自己的头像" class="headerlink" title="1，配置自己的头像"></a>1，配置自己的头像</h3><p>修改themes/yilia/_cofig.yml 中的头像url路径，</p>
+<p><img src="/assets/images/yilia的个人配置/1504195584297.jpg" alt="enter description here"></p>
+<p>/assets/image/icon.jpg 对应的是blog/source/assets/image/icon.jpg</p>
+<p><img src="/assets/images/yilia的个人配置/1504195602109.jpg" alt="enter description here"></p>
+<h3 id="2，配置ABOUTME"><a href="#2，配置ABOUTME" class="headerlink" title="2，配置ABOUTME"></a>2，配置ABOUTME</h3><p>找到/themes/yilia/_config.yml中的最后aboutme,按照自己需要填写自己的简介即可。：</p>
+<p><img src="/assets/images/yilia的个人配置/1504198005053.jpg" alt="enter description here"></p>
+<h3 id="3，配置其他的东西"><a href="#3，配置其他的东西" class="headerlink" title="3，配置其他的东西"></a>3，配置其他的东西</h3><p>其实在项目的readme中都有很详细的说明，可以自己按需配置，不懂配置的可以留言</p>
+<h2 id="二，集成第三方服务"><a href="#二，集成第三方服务" class="headerlink" title="二，集成第三方服务"></a>二，集成第三方服务</h2><h3 id="1，集成畅言评论"><a href="#1，集成畅言评论" class="headerlink" title="1，集成畅言评论"></a>1，集成畅言评论</h3><p>yilia主题提供了多种评论服务的集成：</p>
+<ul>
+<li>多说</li>
+<li>网易云跟帖</li>
+<li>畅言</li>
+<li>Disqus</li>
+</ul>
+<p>但是多说已经关闭服务了，网易云跟帖好像有限期的，我选择了集成畅言评论：</p>
+<p>畅言注册一个账号之后需要配置站点的信息才可以使用，而且需要有网站的备案：</p>
+<p><img src="/assets/images/yilia的个人配置/1504198219512.jpg" alt="enter description here"></p>
+<ul>
+<li>站点名称是给自己的网站起个名字</li>
+<li>站点网址是和ICP备案号相匹配的（没有备案号的下面说下怎么获取一个）</li>
+<li>域名白名单是允许有评论功能的网站的主域名，可以配置多个主域名，只要上面的备案通过了第一个写备案网站，后面写自己的github page就可以了</li>
+</ul>
+<h4 id="获取网站的备案号"><a href="#获取网站的备案号" class="headerlink" title="获取网站的备案号"></a>获取网站的备案号</h4><p>给出网站查询百度备案号的链接，自己随便找个网上的域名来搜一下即可</p>
+<p><a href="http://www.beianbeian.com/gaoji?field=siteDomain&amp;value=baidu.com" target="_blank" rel="external">http://www.beianbeian.com/gaoji?field=siteDomain&amp;value=baidu.com</a></p>
+<p>获取到备案号 和站点网址一起写到设置中：</p>
+<p>需要注意的是站点网址要填具体的http例如：</p>
+<p><img src="/assets/images/yilia的个人配置/1504198294481.jpg" alt="enter description here"></p>
+<p>最后点确认，需要等待几个小时验证通过</p>
+<h4 id="获取生成的appid和conf"><a href="#获取生成的appid和conf" class="headerlink" title="获取生成的appid和conf"></a>获取生成的appid和conf</h4><p>如果顺利的话，通过验证了会生成一段代码大概如图：</p>
+<p><img src="/assets/images/yilia的个人配置/1504200392647.jpg" alt="enter description here"></p>
+<p>找到里面的appid,conf两个字符串，copy填到/themes/yilia/_config.yml中:</p>
+<p><img src="/assets/images/yilia的个人配置/1504200403632.jpg" alt="enter description here"></p>
+<p>不要使用我的id，因为我的白名单里面没有你们的github.io，所以你们copy我的appid是不会成功的。</p>
+<p>修改配置文件之后，执行</p>
+<ul>
+<li>hexo clean</li>
+<li>hexo g -d</li>
+</ul>
+<p>等待一会儿，打开自己的github page就可以看到评论功能了！</p>
+<h3 id="2，集成百度分析"><a href="#2，集成百度分析" class="headerlink" title="2，集成百度分析"></a>2，集成百度分析</h3><p>打开百度分析网页选择注册站长账号: <a href="https://tongji.baidu.com/web/register" target="_blank" rel="external">https://tongji.baidu.com/web/register</a></p>
+<p>按信息填写即可，成功之后会生成一段的密钥，直接copy到/themes/yilia/_config.yml中的baidu_analytics中即可:</p>
+<p><img src="/assets/images/yilia的个人配置/1504200480400.jpg" alt="enter description here"></p>
+<h2 id="三，结尾"><a href="#三，结尾" class="headerlink" title="三，结尾"></a>三，结尾</h2><p>感觉到这里，一个功能完整的博客雏形已经出来了，可以试下自己写博客，然后部署上传，看到自己写的博客是不是满满的成就感呢，哈哈哈。</p>
+<p>写博客我是用的<a href="http://markdown.xiaoshujiang.com/" target="_blank" rel="external">小书匠</a>，还是很不错的，qq的截图直接可以粘贴进文档之中，记住一些快捷键的话使用起来相当便捷。（吐槽的是页面功能不突出，找自己保存的文档找了半天没找到。。）</p>
+
       
 
       
@@ -602,10 +257,82 @@ var _hmt = _hmt || [];
       
 
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/05/yilia的个人配置/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/08/08/带你入门travis-ci/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          带你入门travis-ci
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/03/十分钟完成个人博客的搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">十分钟完成个人博客的搭建</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -620,85 +347,39 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-十分钟完成个人博客的搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/十分钟完成个人博客的搭建/">十分钟完成个人博客的搭建</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/03/十分钟完成个人博客的搭建/" class="archive-article-date">
-  	<time datetime="2017-08-03T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h2><p>寒假放假的时候学了一点vue，简单用vue和php搭建的<a href="https://github.com/151250010/myblog" target="_blank" rel="external">个人博客</a>现在看来有很多的不足，不支持markdown，写博客必须要手写html的，所以这天用hexo搭建github pages个人博客，把流程记录一下，需要的人可以看下，一切顺利的话真的十分钟足够了。</p>
-        
-          <a class="article-more-a" href="/2017/08/03/十分钟完成个人博客的搭建/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">建站教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一，theme配置文件的修改"><span class="toc-number">1.</span> <span class="toc-text">一，theme配置文件的修改</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，配置自己的头像"><span class="toc-number">1.1.</span> <span class="toc-text">1，配置自己的头像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，配置ABOUTME"><span class="toc-number">1.2.</span> <span class="toc-text">2，配置ABOUTME</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，配置其他的东西"><span class="toc-number">1.3.</span> <span class="toc-text">3，配置其他的东西</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二，集成第三方服务"><span class="toc-number">2.</span> <span class="toc-text">二，集成第三方服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，集成畅言评论"><span class="toc-number">2.1.</span> <span class="toc-text">1，集成畅言评论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取网站的备案号"><span class="toc-number">2.1.1.</span> <span class="toc-text">获取网站的备案号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取生成的appid和conf"><span class="toc-number">2.1.2.</span> <span class="toc-text">获取生成的appid和conf</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，集成百度分析"><span class="toc-number">2.2.</span> <span class="toc-text">2，集成百度分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三，结尾"><span class="toc-number">3.</span> <span class="toc-text">三，结尾</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
+  
+  
+  
 
   
+  <div id="SOHUCS" sid="yilia的个人配置" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "cyt8Y7w50"; 
+var conf = "prod_147703479bb2596139f77f6050e47188"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -721,8 +402,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
