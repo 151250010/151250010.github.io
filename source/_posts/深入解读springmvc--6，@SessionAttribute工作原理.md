@@ -21,6 +21,8 @@ tags:
 
 @SessionAttributes 和 @SessionAttribute 是SpringMVC提供的两个注解，用于在请求之间保存模型的属性，以及获取一次会话之间的某个属性值。
 
+<!--more-->
+
 ### 1，@SessionAttributes
 
 Spring文档之中对于 @SessionAttributes 使用的说明：
