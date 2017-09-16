@@ -17,6 +17,8 @@ tags:
 
  **RequestMappingHandlerAdapter** 中的核心：
 
+ <!--more-->
+
 ``` java
 protected ModelAndView invokeHandlerMethod(HttpServletRequest request,
 			HttpServletResponse response, HandlerMethod handlerMethod) throws Exception {
@@ -53,7 +55,6 @@ protected ModelAndView invokeHandlerMethod(HttpServletRequest request,
 
 	}
 ```
-<!--more-->
 
 很清楚的可以看到，所有的参数解析器以及返回值解析器都被设置到  **ServletInvocableHandlerMethod** 之中，然后全部委托给  **ServletInvocableHandlerMethod** 的  **invokeAndHandle** 方法，在实际调用处理器方法的时候再用这些解析器来进行解析。
 
