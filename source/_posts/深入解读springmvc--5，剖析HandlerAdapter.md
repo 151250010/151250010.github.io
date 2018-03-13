@@ -58,7 +58,7 @@ tags:
 
 HandlerAdapter定义的三个方法：
 
-![HandlerAdapter的定义](http://photos.zengxihao.xyz/015779f39fa61108f81d2f8939e84c82.png)
+![HandlerAdapter的定义](http://ovn5va0pd.bkt.clouddn.com/015779f39fa61108f81d2f8939e84c82.png)
 
  SpringMvc提供的默认的**HandlerAdapter实现** 包括 ：
 
@@ -74,11 +74,11 @@ DipsatcherServlet中的HandlerAdapter列表的初始化和HandlerMapping列表�
 
 整个初始化的流程：
 
-![DispatcherServlet的初始化](http://photos.zengxihao.xyz/4f5bd2add250df65193a3b280e2b5f4e.png)
+![DispatcherServlet的初始化](http://ovn5va0pd.bkt.clouddn.com/4f5bd2add250df65193a3b280e2b5f4e.png)
 
 DispatcherServlet自身的 **inintStrategies()** 方法就是用创建的web上下文中的各种SpringMvc组件来初始化  **DispatcherServlet** 自身的各种属性：
 
-![initStrategies](http://photos.zengxihao.xyz/89a170a3ba1567e0966b018b94daa18a.png)
+![initStrategies](http://ovn5va0pd.bkt.clouddn.com/89a170a3ba1567e0966b018b94daa18a.png)
 
 其中的  **initHandlerAdapters** 的实现就是在web上下文(也可以指定包括web上下文的根上下文)中寻找HandlerAdapter的实现，全部来初始化 **DispatcherServlet**  维持的  **HandlerAdapter列表** ，具体的实现不细说了。
 
@@ -90,25 +90,25 @@ DispatcherServlet自身的 **inintStrategies()** 方法就是用创建的web上�
 
 对于静态资源请求，一般在Spring配置文件中加上：
 
-![mvc:resource](http://photos.zengxihao.xyz/6319496991ace0ef4575d88f7801364e.png)
+![mvc:resource](http://ovn5va0pd.bkt.clouddn.com/6319496991ace0ef4575d88f7801364e.png)
 
 mapping是ant匹配请求路径， location 是对应请求路径的静态资源文件位置。
 
 首先需要清楚的是  **mvc:resource** 标签，Spring会用  **ResourceBeanDefinitionParser** 类来进行处理，而  **ResourceBeanDefinitionParser** 所做的事情就是用配置的  (mapping，location)作为 urlMap属性， 注册生成一个 **SimpleUrlHandlerMapping** ，并且与其相对应的处理器  **ResourceHttpReqeustHandler**  和处理器适配器 **HttpReqeustHandlerAdapter** ，注册到上下文之中去 ：
 
-![registerDefaultComponent](http://photos.zengxihao.xyz/902167b33178b74d134f73f87391369f.png)
+![registerDefaultComponent](http://ovn5va0pd.bkt.clouddn.com/902167b33178b74d134f73f87391369f.png)
 
 #### 请求处理详细过程
 
 一个静态资源的请求在 **DipsatcherServlet** 的  **doDispatch** 中，会用注册了匹配的请求路径的  **SimpleUrlHandlerMapping**  找到匹配的  **ResourceHttpRequestHandler** ，然后由  **HttpRequestHandlerAdapter** 调用  **ResourceHttpRequestHandler** 的  **handlerRequest** 方法，往response的输出流中写入请求的资源。
 
-![静态资源处理流程](http://photos.zengxihao.xyz/b89e3d1a27ba3d6248e41a7a155b2a94.png)
+![静态资源处理流程](http://ovn5va0pd.bkt.clouddn.com/b89e3d1a27ba3d6248e41a7a155b2a94.png)
 
 ### 2，动态请求处理
 
 动态请求最典型也最常用的就是使用  **@RequestMapping** 注解的处理器方法对请求进行处理，配套的处理器是  **HandlerMethod** ，HandlerMapping 使用的是  **RequestMappingHandlerMapping** ，HandlerAdapter 使用的是  **RequestMappingHandlerAdapter** ，现在看下  **RequestMappingHandlerAdapter** 的执行流程：
 
-![ReqeustMappingHandlerAdapter执行流程](http://photos.zengxihao.xyz/8c85607fae1c52229a660cd24076ec13.png)
+![ReqeustMappingHandlerAdapter执行流程](http://ovn5va0pd.bkt.clouddn.com/8c85607fae1c52229a660cd24076ec13.png)
 
 核心在于：
 - [ ] 参数处理
