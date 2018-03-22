@@ -60,7 +60,6 @@ public Connector(String protocol) {
 }
 ```
 1. Connector 构造函数在启动Tomcat读取**conf/server.xml**之后被调用，用配置文件中的Connector构造实际的Connector。
-
 2. 构造函数中主要反射实例化了Http11NioProtocol对象。
 3. 整个Server初始化会带动Connector的初始化，调用Connector中的**initInternal** 方法，首先初始化CoyoteAdapter 并调用setAdapter方法，然后启动Http11NioProtocol对象，并且带动后面一系列组件的初始化。
 
