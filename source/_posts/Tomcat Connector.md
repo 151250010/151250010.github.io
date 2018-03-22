@@ -19,6 +19,8 @@ Connector主要负责**接收客户端的连接**和对**客户端的请求处�
 
 ![主要部件的作用][1]
 
+<!--more-->
+
 - Http11NioProtocol : Http 协议1.1 版本的抽象，包含接收客户端连接，接收客户端消息报文，报文解析处理，对客户端响应的整个过程。
   - NioEndpoint: Tomcat9 中已经取消了对bio的支持，默认使用nio运行模式，NioEndpoint组件是非阻塞I/O终端的一个抽象，其中包含了很多子组件，其中包括LimitLatch（连接数控制器），Acceptor（套接字接收器），Poller轮询器，Poller池，SocketProcessor（任务定义器）和Executor（任务执行器）。
     - LimitLatch：限制连接数的一个控制器，限制客户端的连接数，nio运行模式下的默认阀门是10000。
