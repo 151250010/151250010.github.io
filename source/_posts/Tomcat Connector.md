@@ -146,7 +146,7 @@ protected final void startAcceptorThreads() {
 ```
 NioEndPoint的启动，最主要是创建Acceptor线程池，同时监听新请求。
 
-#### 3.4 Acceptor
+#### 3.3.1 Acceptor
 
 ``` java
 public class Acceptor<U> implements Runnable {
@@ -206,7 +206,7 @@ public class NioEndpoint {
 }
 ```
 
-#### 3.5 Poller
+#### 3.3.2 Poller
 
 ``` java
 public class Poller implements Runnable {
@@ -350,7 +350,7 @@ public class NioEndPoint {
 3. 处理key对应的channel，调用NioEndPoint的processSocket()
 4. 从SocketProcessor池中取出空闲的SocketProcessor，关联socketWrapper，提交运行SocketProcessor
 
-#### 3.6 SocketProcessor
+#### 3.3.3 SocketProcessor
 
 ``` java
 protected class SocketProcessor extends SocketProcessorBase<NioChannel> {
@@ -371,7 +371,7 @@ protected class SocketProcessor extends SocketProcessorBase<NioChannel> {
 }
 ```
 
-### 3.7 ConnectionHandler
+### 3.4 ConnectionHandler
 
 ``` java
 protected static class ConnectionHandler<S> implements AbstractEndpoint.Handler<S> {
