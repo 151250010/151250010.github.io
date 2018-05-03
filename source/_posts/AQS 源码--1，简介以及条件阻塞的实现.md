@@ -46,7 +46,7 @@ Node提供了一些对应属性的判断和获取方法，一个**isShared()** �
 
 AQS中的两个内部类之一，Condition接口的实现，AQS的Lock实现的基础，主要核心方法是实现的**signal(), signalAll(),await()** 等Condition接口的方法。简单阐述一下 signal() 以及 await() 的执行过程。
 
-### signal()
+### 3.1 signal()
 
 signal() 方法：
 
@@ -63,7 +63,7 @@ signal() 方法：
 
 然后调用 **doSignal(Node)** 方法唤醒 condition 队列中的第一个节点。
 
-### doSignal(Node)
+### 3.2 doSignal(Node)
 
 ``` java
 		private void doSignal(Node first) {
@@ -78,7 +78,7 @@ signal() 方法：
 
 代码首先进入do 代码块，将 firstWaiter 指向当前唤醒节点的下一个节点，并且将 first 节点的引用置为null ， 接着进入while ，如果将节点从当前的 condition queue 转换到 可执行的 sync queue 失败并且下一个节点不为空的话，循环将下一个节点进行队列转换操作。
 
-### doSignalAll(Node)
+### 3.3 doSignalAll(Node)
 
 ``` java
 		private void doSignalAll(Node first) {
@@ -94,7 +94,7 @@ signal() 方法：
 
 就是将整个链表中的所有节点都进行转换，无所谓转换的成功与失败，转换失败的话是由于Node已经处于**CANCELLED** 状态。
 
-### await()
+### 3.4 await()
 
 await() 方法提供了可中断的条件等待，代码：
 
@@ -139,7 +139,7 @@ await() 方法提供了可中断的条件等待，代码：
  6. 调用**unlinkCancelledWaiters()** 清理一下condition queue 中已经变为CANCELLED状态的Node。
  7. 最后根据中断类型对中断进行处理，如果是THROW_IE那么抛出中断异常，如果是REINTERRUPT那么调用**selfInterrupt()** 进行自我中断。
 
- ### addConditionWaiter()
+ ### 3.5 addConditionWaiter()
  
 ``` java
  		private Node addConditionWaiter() {
@@ -160,7 +160,7 @@ await() 方法提供了可中断的条件等待，代码：
 ```
 往条件等待队列中加入node的时候，首先判断一下最后的节点是否已经被取消，如果被取消需要对condition queue进行清理操作，然后用当前线程构造一个新的Node，加入到condition queue中。
 
-### fullyRelease(Node)
+### 3.6 fullyRelease(Node)
 
 调用此方法完成当前线程拥有state的完全释放，并且返回释放的state数目：
 
@@ -183,7 +183,7 @@ await() 方法提供了可中断的条件等待，代码：
 ```
 首先的核心在于调用 **getState()** 方法获取当前线程state数目，并且调用**release(int)** 释放掉全部的state。最后如果释放失败的话，改变node的内部状态为CANCELLED。
 
-### isOnSyncQueue(Node)
+### 3.7 isOnSyncQueue(Node)
 
 ``` java
 	final boolean isOnSyncQueue(Node node) {
@@ -209,7 +209,7 @@ await() 方法提供了可中断的条件等待，代码：
 
 一段很长的注解是阐述如果一个node.prev 非空，并不能一定说明node处在AQS的sync queue中，需要从尾开始遍历整个链表。为什么不能说明node在队列中呢？解释是说CAS操作可能存在失败的情况，具体应该怎么理解后面细说。
 
-### ArrayBlockingQueue中Condition的使用
+### 3.8 ArrayBlockingQueue中Condition的使用
 
 在ArrayBlockingQueue中，维持了ReentrantLock中的两个Condition ： 
 
@@ -269,13 +269,13 @@ T1 被唤醒，我们可以回到上面看一下await() 代码：
 
 > 三种形式的park还各自支持一个Blocker对象参数，此对象在线程阻塞的时候被记录，以允许监视工具和诊断工具确定线程受阻塞的原因（这样的话工具可以使用的方法是getBlocker(java.lang.Thread)）访问Blocker ，建议使用带有Blocker参数的park方法。
 
-### unpark(Thread)
+### 4.1 unpark(Thread)
 
 - 如果permit不可用的话，使permit可用，也就是park()方法立即返回；
 - 如果permit可用的话，参数线程的下一次park()方法调用将保证不阻塞；
 - 如果线程还没有启动的话，这个方法不保证执行的结果。
 
-### park(Object)
+### 4.2 park(Object)
 
 阻塞当前线程，直到发生了下面三种情况就会马上返回：
 
@@ -283,7 +283,7 @@ T1 被唤醒，我们可以回到上面看一下await() 代码：
  2. 其他的线程中断了当前线程
  3. 方法没有理由地突然返回了
 
-### 结合ConditionObject#await() 场景
+### 4.3 结合ConditionObject#await() 场景
 
 在ConditionObject#await() 方法中，使用了 **LockSupport.park(this)** 来阻塞当前线程T1，这样的话，只有将**condition queue** 的T1Node节点转移到AQS的**sync queue** 中，并且被他的前驱节点唤醒的时候，（前驱节点唤醒T1 Node 发生在**AQS#release()** 方法中，调用LockSupport.unpark(s.thread)） 方法：
 
