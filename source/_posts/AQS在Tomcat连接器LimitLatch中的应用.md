@@ -10,8 +10,6 @@ tags:
 
 今天重新具体看了一次Tomcat Connector中Acceptor类以及NioEndPoint类的代码实现，感觉还是收获颇多的，在代码里发现了AQS的应用，特意记录一下其使用的场景以及情况。
 
-<!--more-->
-
 ## LimitLatch
 
 ### 作用
@@ -21,6 +19,8 @@ LimitLatch 是Tomcat中用来控制Tomcat连接数目的一个阀门，主要起
 显然只有当其他的连接请求处理完成并且socket被关闭之后，Acceptor线程才能继续执行。
 
 如何实现这样的控制效果呢？
+
+<!--more-->
 
 ### 实现
 
@@ -159,7 +159,7 @@ public long countDown() {
 
 打印日志释放锁，也是对Sync的封装，对外提供简单易操作的释放锁的接口。
 
-### 结尾
+## 结尾
 
 LimitLatch作为进入Tomcat的第一个阀门，利用AQS加上AtomciLong简单地实现了一个阀门控制器，当超过limit限制的连接到来，之后的所有Acceptor线程都会被阻塞无法继续获取socket。
  
