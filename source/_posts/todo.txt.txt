@@ -1,0 +1,36 @@
+﻿---
+title: hsweb中的权限控制
+tags: 新建,模板,小书匠
+grammar_cjkRuby: true
+---
+
+## hsweb
+
+hsweb是什么？
+
+>hsweb (haʊs wɛb) 是一个用于快速搭建企业后台管理系统的基础项目,集成一揽子便捷功能如:通用增删改查，在线代码生成，权限管理，OAuth2.0 ,动态多数据源分布式事务，动态脚本，动态定时任务，在线数据库维护等等. 基于 spring-boot,mybaits http://hsweb.io
+
+github：[https://github.com/hs-web/hsweb-framework](https://github.com/hs-web/hsweb-framework) ,star数目已经快5k了，值得了解一下。
+
+想到已经咸鱼了一段时间，国庆有空就看了一下hsweb关于权限控制这一块的一些实现，下面可以说一下hsweb的RBAC和数据权限控制的实现，以及自己的一些思考。
+
+<!--more-->
+
+## 依赖和接入
+
+hsweb是强依赖spring boot的，只有在spring存在的时候才能使用hsweb的权限控制。依赖spring实现了事件监听的功能，提供了默认的一系列权限控制相关的接口实现，在Spring容器中没有接口的实现的时候会使用默认的实现。
+
+如何接入hsweb提供的权限系统？
+有个demo: [https://github.com/hs-web/hsweb-framework/blob/master/quick-start/AUTZ.md](https://github.com/hs-web/hsweb-framework/blob/master/quick-start/AUTZ.md)
+
+主要可以分为四步：
+1，maven中添加hsweb-authorization-basic依赖；
+2，Spring Boot的配置类上添加注解 **@EnableAopAuthorize** ；
+3，提供数据权限验证的数据来源，就是用户信息和用户的权限配置数据，可以来源于spring配置文件，或者是持久化的数据；
+4，将**Authorize** 注解用在需要进行权限控制的Spring MVC Controller或者Controller的方法上面。
+
+验证的接入并不复杂，只是需要自行提供数据源，同时数据需要满足**Authentication** 类的数据定义。而hsweb的权限框架只是提供一种较为方便的权限控制使用形式而已。
+
+## hsweb权限控制的使用
+
+在接入hsweb的权限控制之后，可以通过 **@Authorize** 注解
