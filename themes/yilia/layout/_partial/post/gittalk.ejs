@@ -156,6 +156,11 @@ function safe_add(x, y)
   var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
   return (msw << 16) | (lsw & 0xFFFF);
 }
+
+function bit_rol(num, cnt)
+{
+  return (num << cnt) | (num >>> (32 - cnt));
+}
 /*-------------------------------------- md5 calculate function end --------------------------------------*/
 
 var url = '<%=url%>'
