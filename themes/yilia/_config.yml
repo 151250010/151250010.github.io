@@ -10,7 +10,7 @@ subnav:
   # rss: "#"
   # zhihu: "#"
   qq: "tencent://message/?uin=851642452&Site=http://vps.shuidazhe.com&Menu=yes"
-  weixin: "https://151250010.github.io/assets/image/mmqrcode1550559272079.png"
+  weixin: "https://151250010.github.io/assets/image/wechat.png"
   #jianshu: "#"
   #douban: "#"
   #segmentfault: "#"
@@ -99,7 +99,7 @@ style:
 # slider的设置
 slider:
   # 是否默认展开tags板块
-  showTags: false
+  showTags: true
 
 # 智能菜单
 # 如不需要，将该对应项置为false
