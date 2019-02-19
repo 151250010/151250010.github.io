@@ -11,7 +11,7 @@ subnav:
   # rss: "#"
   # zhihu: "#"
   qq: "851642452"
-  #weixin: "#"
+  weixin: "13927501605"
   #jianshu: "#"
   #douban: "#"
   #segmentfault: "#"
@@ -83,8 +83,9 @@ duoshuo: false
 wangyiyun: false
 
 #3、畅言
-changyan_appid: 'cyt8Y7w50'
-changyan_conf: 'prod_147703479bb2596139f77f6050e47188'
+#changyan_appid: 'cyt8Y7w50'
+#changyan_conf: 'prod_147703479bb2596139f77f6050e47188'
+changyan: false
 
 #4、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia的
 disqus: false
