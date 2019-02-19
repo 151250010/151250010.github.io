@@ -163,4 +163,4 @@ public long countDown() {
 
 LimitLatch作为进入Tomcat的第一个阀门，利用AQS加上AtomciLong简单地实现了一个阀门控制器，当超过limit限制的连接到来，之后的所有Acceptor线程都会被阻塞无法继续获取socket。
  
-  [1]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/21/SpringBeans%20UML.png "SpringBeans UML"
+  [1]: http://ww1.sinaimg.cn/large/006pluSpgy1g0bmh0n646j30vi0oe74z.jpg "SpringBeans UML"

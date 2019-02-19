@@ -125,9 +125,9 @@ A：在每个循环的末尾会对当前循环是否有事件，是否有就绪c
 后面可以对这方面进行分析。
 
 
-  [1]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/29/1527564791106.jpg
-  [2]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/29/UML%E6%97%B6%E5%BA%8F%E5%9B%BE.png "UML时序图"
-  [3]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/29/1527599092268.jpg
-  [4]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/29/1527599659709.jpg
-  [5]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/29/1527601115487.jpg
-  [6]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/29/1527601352434.jpg
+  [1]: http://ww1.sinaimg.cn/large/006pluSpgy1g0blwpm3gjj30n2097dgy.jpg
+  [2]: http://ww1.sinaimg.cn/large/006pluSpgy1g0blx5fqohj30vn0hxac3.jpg "UML时序图"
+  [3]: http://ww1.sinaimg.cn/large/006pluSpgy1g0blxp59kwj30rs040wes.jpg
+  [4]: http://ww1.sinaimg.cn/large/006pluSpgy1g0blxuhjvgj30rs0is75w.jpg
+  [5]: http://ww1.sinaimg.cn/large/006pluSpgy1g0blxzqam0j30rs057t91.jpg
+  [6]: http://ww1.sinaimg.cn/large/006pluSpgy1g0bly4kw36j30rs0bqmye.jpg

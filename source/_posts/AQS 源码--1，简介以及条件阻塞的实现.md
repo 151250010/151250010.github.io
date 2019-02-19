@@ -306,9 +306,9 @@ T1 被唤醒，我们可以回到上面看一下await() 代码：
 
 
 
-  [1]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/2/1525234698451.jpg
-  [2]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/3/1525332106032.jpg
-  [3]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/3/1525332257787.jpg
-  [4]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/3/1525335803415.jpg
-  [5]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/3/1525336001850.jpg
-  [6]: http://ovn5va0pd.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/3/1525338197743.jpg
+  [1]: http://ww1.sinaimg.cn/large/006pluSpgy1g0blzydierj309w0kp0tw.jpg
+  [2]: http://ww1.sinaimg.cn/large/006pluSpgy1g0bm06gdyoj30b907f3z0.jpg
+  [3]: http://ww1.sinaimg.cn/large/006pluSpgy1g0bm0burxmj30gt0adgme.jpg
+  [4]: http://ww1.sinaimg.cn/large/006pluSpgy1g0bm0gzjv6j30dm09n0te.jpg
+  [5]: http://ww1.sinaimg.cn/large/006pluSpgy1g0bm0lgzgfj30dw0dd0tt.jpg
+  [6]: http://ww1.sinaimg.cn/large/006pluSpgy1g0bm0v8w53j30l50fptaw.jpg

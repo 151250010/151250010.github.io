@@ -72,7 +72,7 @@ WebRequest 是一个简单的接口，继承了RequestAttribute 接口，可以�
 
 在  **RequestMappingHandlerAdapter** 中实例化了  **ServletWebRequest** 作为WebRequest的实现：
 
-![ServletWebRequest](http://ovn5va0pd.bkt.clouddn.com/72684809371550e17b659a0081c6a84c.png)
+![ServletWebRequest](http://ww1.sinaimg.cn/large/006pluSpgy1g0blgdpfdyj30rs04jdg6.jpg)
 
 `ModelFactory`
 
@@ -89,11 +89,11 @@ WebRequest 是一个简单的接口，继承了RequestAttribute 接口，可以�
 
 简单建立一个@SessionAttributes的使用例子，将userName以及password作为 @SessionAttributes 的names属性：
 
-![SessionAttributes 使用](http://ovn5va0pd.bkt.clouddn.com/8d620e003198ab7bf206ede278d20c8b.png)
+![SessionAttributes 使用](http://ww1.sinaimg.cn/large/006pluSpgy1g0blixtujaj30rr04674c.jpg)
 
 可以用ModelMap或者@ModelAttribute注解往Model之中填充必需的 userName 以及 password 属性。我用了  **ModelMap** :
 
-![init方法](http://ovn5va0pd.bkt.clouddn.com/63dbb0d626b3d0059e00b3b82e5892e5.png)
+![init方法](http://ww1.sinaimg.cn/large/006pluSpgy1g0bljtnosdj30rs05gt92.jpg)
 
 这样在完成init请求之后，Session之中就应该存在userName,password了。
 
@@ -165,17 +165,17 @@ protected ModelAndView invokeHandlerMethod(HttpServletRequest request,
 
 > 1, 在之前的创建的项目中，找到  **ModelFactory.updateModel** ，打上断点：
 >
-> ![breakpoint](http://ovn5va0pd.bkt.clouddn.com/f56c4853767e153099f51d07dbce5e2b.png)
+> ![breakpoint](http://ww1.sinaimg.cn/large/006pluSpgy1g0blk7q15ij30xd05k74r.jpg)
 >
 > 2，运行项目，请求 http:localhost:8080/session/init
 >
 > 3，断点生效的时候，首先看一下session变量的值：
 >
-> ![breakpoint - variable values](http://ovn5va0pd.bkt.clouddn.com/d0538527db49a36b9abb7484ae5f06d8.png)
+> ![breakpoint - variable values](http://ww1.sinaimg.cn/large/006pluSpgy1g0blknchz9j31040dwq5p.jpg)
 >
 > 4, 运行到this.sessionAttributesHandler.storeAttributes(request, defaultModel)之后，看下session属性：
 >
-> ![afterAttribuetStore](http://ovn5va0pd.bkt.clouddn.com/126bf1da89ac8bd86fc657486bf1a5ec.png)
+> ![afterAttribuetStore](http://ww1.sinaimg.cn/large/006pluSpgy1g0blkxmqlij31040drgol.jpg)
 >
 > 说明session属性的设置确实是在updateModel方法里面进行的，并且委托给 SessionAttributeHandler.storeAttributes 方法完成。
 >
@@ -186,7 +186,7 @@ protected ModelAndView invokeHandlerMethod(HttpServletRequest request,
 
 getModelFactory的实现：
 
-![getModelFactory](http://ovn5va0pd.bkt.clouddn.com/c45467ccbbc4243a4c0af7d29ec72f5d.png)
+![getModelFactory](http://ww1.sinaimg.cn/large/006pluSpgy1g0bll63m11j30xc0hztaz.jpg)
 
 主要做了四个事情：
 
@@ -199,7 +199,7 @@ getModelFactory的实现：
 
 getSessionAttributesHandler的实现：
 
-![getSessionAttributesHandler](http://ovn5va0pd.bkt.clouddn.com/9681d5e6fa1fa325eea8d9c2a1163e87.png)
+![getSessionAttributesHandler](http://ww1.sinaimg.cn/large/006pluSpgy1g0blle9ch4j30t50atjsk.jpg)
 
 先从当前的缓存中尝试获取 SessionAttributesHandler 实例，没有的话自己new一个并且放入缓存。
 
@@ -207,13 +207,13 @@ getSessionAttributesHandler的实现：
 
 SessionAttributesHandler的构造函数：
 
-![new SessionAttributesHandler](http://ovn5va0pd.bkt.clouddn.com/406c4cfeee9efcc57e3eb675314ec7dd.png)
+![new SessionAttributesHandler](http://ww1.sinaimg.cn/large/006pluSpgy1g0blloj092j30rr0bbmy7.jpg)
 
 用@SessionAttributes注解的names和types属性来初始化成员属性  **attributeNames** 以及  **attributeTypes** ，最后还加入到  **knownAttributeNames** 已知的Session属性集合中。
 
 ### 3，modelFactory.initModel 实现
 
-![initModel](http://ovn5va0pd.bkt.clouddn.com/d89f566a65343abc2279e8dc44f73801.png)
+![initModel](http://ww1.sinaimg.cn/large/006pluSpgy1g0bllyau89j30z30cnwfy.jpg)
 
 - initModel首先把请求的Session之中的所有属性放到 ModelAndViewContainer 之中
 - 然后对  **getModelFactory** 时候生成的 @ModelAttribute 注解的执行方法列表 进行调用，把结果也写入ModelAndViewContainer
@@ -227,11 +227,11 @@ SessionAttributesHandler的构造函数：
 
 通过 SessionStatus.setCompleted() 就可以清除@SessionAttributes加入session 之中的属性，实现比较简单：
 
-![updateMpdel](http://ovn5va0pd.bkt.clouddn.com/391c40b3c2df60a083666034a68ba1f9.png)
+![updateMpdel](http://ww1.sinaimg.cn/large/006pluSpgy1g0blmalfgxj30sq093wf8.jpg)
 
 在updateModel 的实现中，如果判断sessionStatus isComplete ， 那么调用 SessionAttributesHandler.cleanupAttribute方法，
 
-![cleanupAttributes](http://ovn5va0pd.bkt.clouddn.com/bb02a1517d5494e4f8f79af8988c1f5e.png)
+![cleanupAttributes](http://ww1.sinaimg.cn/large/006pluSpgy1g0blmx2h0wj30oy041q33.jpg)
 
 cleanupAttributes的实现 就是把之前记录的所有 @SessionAttributes 注解之中的属性，在request中一一删除，这样就达到了清除session属性的效果。
 

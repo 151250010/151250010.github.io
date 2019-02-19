@@ -110,7 +110,7 @@ HandlerMethodArgumentResolver定义了一个参数解析器需要实现的两个
 - 是否支持对该参数的解析
 - 解析参数后的实际值，例如@ReqeustParam("name")String name 解析之后传给方法的实际参数值就是请求之中 name= xxx 的 xxx
 
-![HandlerMethodArgumentResolver](http://ovn5va0pd.bkt.clouddn.com/1efa5cbb0faf8b9a9033594c5bad4fab.png)
+![HandlerMethodArgumentResolver](http://ww1.sinaimg.cn/large/006pluSpgy1g0blnt435bj30rs0mpgo4.jpg)
 
 springmvc 之中的 HandlerMethodArgumentResolver 其实可以分为四种：
 
@@ -121,11 +121,11 @@ springmvc 之中的 HandlerMethodArgumentResolver 其实可以分为四种：
 
 看下springmvc提供的一系列的默认基于注解和类型参数解析器：
 
-![default argument resolvers](http://ovn5va0pd.bkt.clouddn.com/d6f7b1e19c8c350c5522147811294e64.png)
+![default argument resolvers](http://ww1.sinaimg.cn/large/006pluSpgy1g0blo2mstrj30t60ko0vs.jpg)
 
 catch-all 的参数解析器：
 
-![catch-all argument resolvers](http://ovn5va0pd.bkt.clouddn.com/e3cf275dd0eb42692d992e2ad940ac1e.png)
+![catch-all argument resolvers](http://ww1.sinaimg.cn/large/006pluSpgy1g0bloal3csj30t103jt8t.jpg)
 
 这些参数解析器大部分按照名字都可以猜出用途，一些具体的解析器可以自己看下实现。
 
@@ -189,13 +189,13 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 看下  **RequestParamMethodArgumentResolver** 中的  **supportsParameter** 实现：
 
-![supportsParammeter](http://ovn5va0pd.bkt.clouddn.com/862a470bda7ec039d6c662591d841e8f.png)
+![supportsParammeter](http://ww1.sinaimg.cn/large/006pluSpgy1g0blom39eqj30td0j50u2.jpg)
 
 对于有 @RequestParam 注解的参数需要判断其中的name属性必须要有，如果没有的话使用的参数解析器是  **RequestParamMapMethodArgumentResolver** ，设置了默认类型的话基本类型的参数也是按照带有@ReqeustParam来进行处理的。
 
 重写父类  **AbstractNamedValueMethodArgumentResolver** 的  **resolveName** 方法：
 
-![resolveName](http://ovn5va0pd.bkt.clouddn.com/58098f38b9b45270b3a83ba692aad11e.png)
+![resolveName](http://ww1.sinaimg.cn/large/006pluSpgy1g0blow7beoj30vr0joq4m.jpg)
 
 处理的逻辑并不复杂：
 
@@ -209,7 +209,7 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 首先看一下  **RequestResponseBodyMethodProcessor** 的继承关系：
 
-![ReqeustResponseBodyMethodProcessor的继承关系](http://ovn5va0pd.bkt.clouddn.com/72464c2a913058f2a5350c7b07a1052d.png)
+![ReqeustResponseBodyMethodProcessor的继承关系](http://ww1.sinaimg.cn/large/006pluSpgy1g0blp332n8j30s20ec0t9.jpg)
 
  **ReqeustResponseBodyMethodProcessor** 同时实现了  **HandlerMethodArgumentResolver** 以及  **HandlerMethodReturnValueHandler** 接口，其中类的作用如下：
 
@@ -223,13 +223,13 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 supportsParameter的实现：
 
-![supportsParameter](http://ovn5va0pd.bkt.clouddn.com/e964195e47ab351324ee7d529595c483.png)
+![supportsParameter](http://ww1.sinaimg.cn/large/006pluSpgy1g0blp93s7qj30m304fdfv.jpg)
 
 简单判断一下参数是不是有@ReqeustBody注解
 
 resolveArgument的实现：
 
-![resolveArgument的实现](http://ovn5va0pd.bkt.clouddn.com/5a17770befba9128055eb28348d471f3.png)
+![resolveArgument的实现](http://ww1.sinaimg.cn/large/006pluSpgy1g0blpexwo1j30v80hegnj.jpg)
 
 逻辑很清晰：
 
@@ -243,13 +243,13 @@ resolveArgument的实现：
 
 supportsReturnType的实现：
 
-![supportsReturnType](http://ovn5va0pd.bkt.clouddn.com/5836c466ca30ce4445b332e66d58a02b.png)
+![supportsReturnType](http://ww1.sinaimg.cn/large/006pluSpgy1g0blq2ea9vj30ua06q74p.jpg)
 
 首先判断一下类上是否带有@ResponseBody注解，没有的话再判断方法上面是否带有 @ResponseBody 注解。
 
 handleReturnValue的实现：
 
-![handleReturnValue](http://ovn5va0pd.bkt.clouddn.com/d0cd77a6f000a80e5da4003b0bdd75b4.png)
+![handleReturnValue](http://ww1.sinaimg.cn/large/006pluSpgy1g0blq7onpoj30te0a23ze.jpg)
 
 处理流程：
 1，设置请求已经处理完成的标志
@@ -262,11 +262,11 @@ handleReturnValue的实现：
 
 在 RequestMappingHandlerAdapter 之中，提供了一些已经实现的 HttpMessageConverter :
 
-![default Http Message Converter](http://ovn5va0pd.bkt.clouddn.com/6c6bf5882212c4c2ffc3f3e6bc054285.png)
+![default Http Message Converter](http://ww1.sinaimg.cn/large/006pluSpgy1g0blqddj2ej30ss089t9p.jpg)
 
 最后的  **AllEncompassingFormHttpMessageConverter** 之中：
 
-![判断是否存在相应的解析器](http://ovn5va0pd.bkt.clouddn.com/6a349f1eac9d451e26335036a16ad694.png)
+![判断是否存在相应的解析器](http://ww1.sinaimg.cn/large/006pluSpgy1g0blqiykkjj30vo0f0jt6.jpg)
 
 判断当前的类路径下面是否存在一些包，存在的话就使用那些封装好的 JSON转换包提供参数转换的功能即可。
 
