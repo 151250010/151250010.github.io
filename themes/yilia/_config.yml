@@ -2,7 +2,6 @@
 
 menu:
   主页: /
-  随笔: /tags/随笔/
 
 # SubNav
 subnav:
@@ -10,8 +9,8 @@ subnav:
   # weibo: "#"
   # rss: "#"
   # zhihu: "#"
-  qq: "851642452"
-  weixin: "13927501605"
+  qq: "tencent://message/?uin=851642452&Site=http://vps.shuidazhe.com&Menu=yes"
+  weixin: "https://151250010.github.io/assets/image/mmqrcode1550559272079.png"
   #jianshu: "#"
   #douban: "#"
   #segmentfault: "#"
@@ -121,10 +120,3 @@ friends:
   友情链接6: http://localhost:4000/
 
 aboutme: 南京大学软件学院学生<br><br>日常学习与生活的记录<br>很高兴认识大家
-
-coding_comments:
-  owner: 'XihaoZeng'
-  repo: 'MyBlog'
-  oauth:
-    client_id: 'f631e7923eb145b933d92828242cbfa2'
-    client_secret: '94a1072c364c3663a87bd71710d3f5fa8784cf8a'
