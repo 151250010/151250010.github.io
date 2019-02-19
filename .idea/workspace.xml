@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3a8efa55-9782-4695-84dd-90440ff25638" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/yilia/layout/_partial/post/gittalk.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/themes/yilia/layout/_partial/post/gittalk.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,8 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/themes/yilia/layout/_partial/post/gittalk.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="280">
+              <caret line="161" column="45" lean-forward="true" selection-start-line="161" selection-start-column="45" selection-end-line="161" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -259,7 +258,7 @@
       <workItem from="1550546880745" duration="12095000" />
       <workItem from="1550568436108" duration="36000" />
       <workItem from="1550568485773" duration="285000" />
-      <workItem from="1550568796880" duration="1216000" />
+      <workItem from="1550568796880" duration="2347000" />
     </task>
     <task id="LOCAL-00001" summary="move storage of pictures from QiNiu to Sina">
       <created>1550550762450</created>
@@ -303,17 +302,24 @@
       <option name="project" value="LOCAL" />
       <updated>1550559979876</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="md5 calculate">
+      <created>1550571055779</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1550571055779</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13653000" />
+    <option name="totallyTimeSpent" value="14784000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -348,7 +354,8 @@
     <MESSAGE value="use coding.net for comments" />
     <MESSAGE value="add qq and wechat, remove 随笔 tag" />
     <MESSAGE value="config wechat" />
-    <option name="LAST_COMMIT_MESSAGE" value="config wechat" />
+    <MESSAGE value="md5 calculate" />
+    <option name="LAST_COMMIT_MESSAGE" value="md5 calculate" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/source/_posts/AQS-impl-of-condition-block.md">
@@ -641,8 +648,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/yilia/layout/_partial/post/gittalk.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="280">
+          <caret line="161" column="45" lean-forward="true" selection-start-line="161" selection-start-column="45" selection-end-line="161" selection-end-column="45" />
         </state>
       </provider>
     </entry>

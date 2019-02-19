@@ -4,7 +4,8 @@
 <script>
 
 /*-------------------------------------- md5 calculate function begin --------------------------------------*/
-var chrsz = 8
+var b64pad  = ""; /* base-64 pad character. "=" for strict RFC compliance   */
+var chrsz   = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
 function b64_md5(s){ return binl2b64(core_md5(str2binl(s), s.length * chrsz));}
 
 function str2binl(str) {
