@@ -121,3 +121,10 @@ friends:
   友情链接6: http://localhost:4000/
 
 aboutme: 南京大学软件学院学生<br><br>日常学习与生活的记录<br>很高兴认识大家
+
+coding_comments:
+  owner: 'XihaoZeng'
+  repo: 'MyBlog'
+  oauth:
+    client_id: 'f631e7923eb145b933d92828242cbfa2'
+    client_secret: '94a1072c364c3663a87bd71710d3f5fa8784cf8a'
