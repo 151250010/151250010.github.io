@@ -1,0 +1,26 @@
+name: blog-build
+on:
+  push:
+    branches:
+      - BlogSource
+jobs:
+  install-node:
+    env:
+      GH_REF: github.com/151250010/151250010.github.io.git
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '6'
+      - run: npm install
+      - run: hexo g
+      - run: cd ./public
+      - run: git init
+      - run: git config user.name "151250010"
+      - run: git config user.email "851642452@qq.com"
+      - run: git add .
+      - run: git commit -m "[Travis CI] Auto Update Blogs"
+      - run: git push --force --quiet "https://${{ secrets.GITHUB_TOKEN }}@$GH_REF" master:master
+
+
